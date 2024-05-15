@@ -110,7 +110,7 @@ enum ChasterExtension: string implements StringBackedEnumInterface
     {
         return match ($this) {
             self::TASKS => Config::class,
-            default => u($this->name)->lower()->replace('_', ' ')->title(allWords: true)->replace(' ', '')->prepend('\\')->prepend('\App\Objects\Chaster\Extension')->append('\\Config')->toString(),
+            default => u($this->name)->lower()->replace('_', ' ')->title(allWords: true)->replace(' ', '')->prepend('\\')->prepend('\Fake\ChasterObjects\Objects\Extension')->append('\\Config')->toString(),
         };
     }
 
