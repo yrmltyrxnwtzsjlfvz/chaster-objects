@@ -2,6 +2,7 @@
 
 namespace Fake\ChasterObjects\Objects;
 
+use Bytes\DateBundle\Helpers\DateTimeHelper;
 use Bytes\DateBundle\Objects\ComparableDateInterval;
 use Bytes\StringMaskBundle\Twig\StringMaskRuntime;
 use DateInterval;
@@ -251,6 +252,11 @@ class Lock implements LockInterface, FormattedNameInterface
         $this->endDate = $endDate;
 
         return $this;
+    }
+
+    public function getEndDateWithFrozenOffset(): ?DateTimeInterface
+    {
+        return !is_null($this->getEndDate()) ? ($this->isFrozen() ? DateTimeHelper::getNowUTC()->add($this->getFrozenAt()->diff($this->getEndDate())) : $this->getEndDate()) : null;
     }
 
     public function getTitle(): ?string
