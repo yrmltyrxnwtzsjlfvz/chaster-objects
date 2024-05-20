@@ -15,6 +15,7 @@ use Fake\ChasterObjects\Enums\ReasonPreventingUnlock;
 use Fake\ChasterObjects\Objects\Interfaces\FormattedNameInterface;
 use Fake\ChasterObjects\Objects\Interfaces\LockInterface;
 use Fake\ChasterObjects\Objects\Interfaces\LockSessionInterface;
+use Fake\ChasterObjects\Objects\Lock\ReasonPreventingUnlocking;
 use Fake\ChasterObjects\Objects\Lock\SharedLock;
 use Fake\ChasterObjects\Objects\Traits\ChasterIdTrait;
 use Fake\ChasterObjects\Objects\Traits\CreatedAtTrait;
