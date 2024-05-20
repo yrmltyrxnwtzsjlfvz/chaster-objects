@@ -254,9 +254,16 @@ class Lock implements LockInterface, FormattedNameInterface
         return $this;
     }
 
-    public function getEndDateWithFrozenOffset(): ?DateTimeInterface
+    public function getDisplayEndDate(): ?DateTimeInterface
     {
-        return !is_null($this->getEndDate()) ? ($this->isFrozen() ? DateTimeHelper::getNowUTC()->add($this->getFrozenAt()->diff($this->getEndDate())) : $this->getEndDate()) : null;
+        if(is_null($this->getEndDate())) {
+            return null;
+        }
+        $endDate = $this->isFrozen() ? DateTimeHelper::getNowUTC()->add($this->getFrozenAt()->diff($this->getEndDate())) : $this->getEndDate();
+        if(!is_null($this->getMaxLimitDate())) {
+            $endDate = min($endDate, $this->getMaxLimitDate());
+        }
+        return $endDate;
     }
 
     public function getTitle(): ?string
