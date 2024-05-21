@@ -11,7 +11,7 @@ use Rector\CodeQuality\Rector\Identical\GetClassToInstanceOfRector;
 use Rector\CodeQuality\Rector\If_\CombineIfRector;
 use Rector\CodingStyle\Rector\ClassMethod\NewlineBeforeNewAssignSetRector;
 use Rector\CodingStyle\Rector\If_\NullableCompareToNullRector;
-//use Rector\CodingStyle\Rector\Property\NullifyUnionNullableRector;
+// use Rector\CodingStyle\Rector\Property\NullifyUnionNullableRector;
 use Rector\CodingStyle\Rector\Stmt\NewlineAfterStatementRector;
 use Rector\CodingStyle\Rector\String_\SymplifyQuoteEscapeRector;
 use Rector\Config\RectorConfig;
@@ -36,13 +36,14 @@ use Rector\Symfony\Symfony61\Rector\Class_\CommandPropertyToAttributeRector;
 use Rector\Symfony\Symfony62\Rector\ClassMethod\ParamConverterAttributeToMapEntityAttributeRector;
 use Rector\Symfony\Symfony62\Rector\MethodCall\SimplifyFormRenderingRector;
 use Rector\TypeDeclaration\Rector\Property\TypedPropertyFromStrictConstructorRector;
-//use Rector\TypeDeclaration\Rector\Property\TypedPropertyFromStrictGetterMethodReturnTypeRector;
+// use Rector\TypeDeclaration\Rector\Property\TypedPropertyFromStrictGetterMethodReturnTypeRector;
 use Rector\TypeDeclaration\Rector\Property\TypedPropertyFromStrictSetUpRector;
-//use Rector\TypeDeclaration\Rector\Property\VarAnnotationIncorrectNullableRector;
+
+// use Rector\TypeDeclaration\Rector\Property\VarAnnotationIncorrectNullableRector;
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->paths([
-        __DIR__ . '/src'
+        __DIR__.'/src',
     ]);
 
     if (str_contains(strtolower(php_uname('s')), 'window')) {
@@ -62,16 +63,17 @@ return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->sets([
         DoctrineSetList::ANNOTATIONS_TO_ATTRIBUTES,
         SymfonySetList::ANNOTATIONS_TO_ATTRIBUTES,
-        //NetteSetList::ANNOTATIONS_TO_ATTRIBUTES,
+        // NetteSetList::ANNOTATIONS_TO_ATTRIBUTES,
         SymfonySetList::SYMFONY_60,
         SymfonySetList::SYMFONY_61,
         SymfonySetList::SYMFONY_62,
+        SymfonySetList::SYMFONY_63,
+        SymfonySetList::SYMFONY_64,
         SymfonySetList::SYMFONY_CODE_QUALITY,
-        SymfonySetList::SYMFONY_CONSTRUCTOR_INJECTION
+        SymfonySetList::SYMFONY_CONSTRUCTOR_INJECTION,
     ]);
 
     $rectorConfig->rules([
-
         // Code Quality
         ArrayMergeOfNonArraysToSimpleArrayRector::class, // https://github.com/rectorphp/rector/blob/main/docs/rector_rules_overview.md#arraymergeofnonarraystosimplearrayrector
         ForeachToInArrayRector::class, // https://github.com/rectorphp/rector/blob/main/docs/rector_rules_overview.md#foreachtoinarrayrector
@@ -84,35 +86,35 @@ return static function (RectorConfig $rectorConfig): void {
         NewlineAfterStatementRector::class, // https://github.com/rectorphp/rector/blob/main/docs/rector_rules_overview.md#newlineafterstatementrector
         NewlineBeforeNewAssignSetRector::class, // https://github.com/rectorphp/rector/blob/main/docs/rector_rules_overview.md#newlinebeforenewassignsetrector
         NullableCompareToNullRector::class, // https://github.com/rectorphp/rector/blob/main/docs/rector_rules_overview.md#nullablecomparetonullrector
-        //NullifyUnionNullableRector::class, // https://github.com/rectorphp/rector/blob/main/docs/rector_rules_overview.md#nullifyunionnullablerector
+        // NullifyUnionNullableRector::class, // https://github.com/rectorphp/rector/blob/main/docs/rector_rules_overview.md#nullifyunionnullablerector
         SymplifyQuoteEscapeRector::class, // https://github.com/rectorphp/rector/blob/main/docs/rector_rules_overview.md#symplifyquoteescaperector
 
         // Naming
         RenameForeachValueVariableToMatchMethodCallReturnTypeRector::class, // https://github.com/rectorphp/rector/blob/main/docs/rector_rules_overview.md#renameforeachvaluevariabletomatchmethodcallreturntyperector
 
         // PHP 8.1
-        //AddConstructorParentCallRector::class,
+        // AddConstructorParentCallRector::class,
         ReadOnlyPropertyRector::class,
         SpatieEnumClassToEnumRector::class, // https://github.com/rectorphp/rector/blob/main/docs/rector_rules_overview.md#spatieenumclasstoenumrector
 
         // Type Declaration
         TypedPropertyFromStrictConstructorRector::class, // https://github.com/rectorphp/rector/blob/main/docs/rector_rules_overview.md#typedpropertyfromstrictconstructorrector
-        //TypedPropertyFromStrictGetterMethodReturnTypeRector::class, // https://github.com/rectorphp/rector/blob/main/docs/rector_rules_overview.md#typedpropertyfromstrictgettermethodreturntyperector
+        // TypedPropertyFromStrictGetterMethodReturnTypeRector::class, // https://github.com/rectorphp/rector/blob/main/docs/rector_rules_overview.md#typedpropertyfromstrictgettermethodreturntyperector
         TypedPropertyFromStrictSetUpRector::class, // https://github.com/rectorphp/rector/blob/main/docs/rector_rules_overview.md#typedpropertyfromstrictsetuprector
-        //VarAnnotationIncorrectNullableRector::class, // https://github.com/rectorphp/rector/blob/main/docs/rector_rules_overview.md#varannotationincorrectnullablerector
+        // VarAnnotationIncorrectNullableRector::class, // https://github.com/rectorphp/rector/blob/main/docs/rector_rules_overview.md#varannotationincorrectnullablerector
 
         // Doctrine
-        //CorrectDefaultTypesOnEntityPropertyRector::class,
-        //DoctrineTargetEntityStringToClassConstantRector::class,
-        //EntityAliasToClassConstantReferenceRector::class,
-        //ImproveDoctrineCollectionDocTypeInEntityRector::class,
-        //InitializeDefaultEntityCollectionRector::class,
-        //MakeEntityDateTimePropertyDateTimeInterfaceRector::class,
-        //MakeEntitySetterNullabilityInSyncWithPropertyRector::class,
-        //TypedPropertyFromColumnTypeRector::class, // https://github.com/rectorphp/rector-doctrine/blob/main/docs/rector_rules_overview.md#typedpropertyfromcolumntyperector
-        //TypedPropertyFromDoctrineCollectionRector::class,
-        //TypedPropertyFromToManyRelationTypeRector::class,
-        //TypedPropertyFromToOneRelationTypeRector::class,
+        // CorrectDefaultTypesOnEntityPropertyRector::class,
+        // DoctrineTargetEntityStringToClassConstantRector::class,
+        // EntityAliasToClassConstantReferenceRector::class,
+        // ImproveDoctrineCollectionDocTypeInEntityRector::class,
+        // InitializeDefaultEntityCollectionRector::class,
+        // MakeEntityDateTimePropertyDateTimeInterfaceRector::class,
+        // MakeEntitySetterNullabilityInSyncWithPropertyRector::class,
+        // TypedPropertyFromColumnTypeRector::class, // https://github.com/rectorphp/rector-doctrine/blob/main/docs/rector_rules_overview.md#typedpropertyfromcolumntyperector
+        // TypedPropertyFromDoctrineCollectionRector::class,
+        // TypedPropertyFromToManyRelationTypeRector::class,
+        // TypedPropertyFromToOneRelationTypeRector::class,
 
         // Symfony
         ContainerGetToConstructorInjectionRector::class,
