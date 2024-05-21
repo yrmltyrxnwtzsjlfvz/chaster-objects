@@ -2,9 +2,10 @@
 
 namespace Fake\ChasterObjects\Objects;
 
+use Bytes\StringMaskBundle\Twig\StringMaskRuntime;
+use Fake\ChasterObjects\Enums\ProfileRole;
 use Fake\ChasterObjects\Objects\Interfaces\FormattedNameInterface;
 use Fake\ChasterObjects\Objects\Traits\ChasterIdTrait;
-use Bytes\StringMaskBundle\Twig\StringMaskRuntime;
 use Symfony\Component\Serializer\Annotation\SerializedName;
 
 class User implements FormattedNameInterface
@@ -13,17 +14,13 @@ class User implements FormattedNameInterface
 
     /**
      * The role.
-     *
-     * @var string|null
      */
-    private $role;
+    private ?ProfileRole $role = null;
 
     /**
      * The username.
-     *
-     * @var string|null
      */
-    private $username;
+    private ?string $username = null;
 
     #[SerializedName('isDisabled')]
     private ?bool $disabled = null;
@@ -39,7 +36,7 @@ class User implements FormattedNameInterface
 
     public ?string $avatarUrl;
 
-    public function getRole(): ?string
+    public function getRole(): ?ProfileRole
     {
         return $this->role;
     }
@@ -47,9 +44,9 @@ class User implements FormattedNameInterface
     /**
      * @return $this
      */
-    public function setRole(?string $role): static
+    public function setRole(ProfileRole|string|null $role): static
     {
-        $this->role = $role;
+        $this->role = !is_null($role) ? ProfileRole::normalizeToEnum($role) : null;
 
         return $this;
     }
