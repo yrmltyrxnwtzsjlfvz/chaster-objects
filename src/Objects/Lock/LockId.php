@@ -3,25 +3,11 @@
 namespace Fake\ChasterObjects\Objects\Lock;
 
 use Fake\ChasterObjects\Objects\Interfaces\LockSessionInterface;
+use Fake\ChasterObjects\Objects\Traits\LockIdTrait;
 
 class LockId implements LockSessionInterface
 {
-    private ?string $lockId = null;
-
-    public function getLockId(): ?string
-    {
-        return $this->lockId;
-    }
-
-    /**
-     * @return $this
-     */
-    public function setLockId(?string $lockId): self
-    {
-        $this->lockId = $lockId;
-
-        return $this;
-    }
+    use LockIdTrait;
 
     public static function normalizeToLockId(LockSessionInterface|string $lock): string
     {
