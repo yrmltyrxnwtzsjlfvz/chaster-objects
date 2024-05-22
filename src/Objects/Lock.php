@@ -256,13 +256,14 @@ class Lock implements LockInterface, FormattedNameInterface
 
     public function getDisplayEndDate(): ?DateTimeInterface
     {
-        if(is_null($this->getEndDate())) {
+        if (is_null($this->getEndDate())) {
             return null;
         }
         $endDate = $this->isFrozen() ? DateTimeHelper::getNowUTC()->add($this->getFrozenAt()->diff($this->getEndDate())) : $this->getEndDate();
-        if(!is_null($this->getMaxLimitDate())) {
+        if (!is_null($this->getMaxLimitDate())) {
             $endDate = min($endDate, $this->getMaxLimitDate());
         }
+
         return $endDate;
     }
 
@@ -333,6 +334,14 @@ class Lock implements LockInterface, FormattedNameInterface
         $this->allowedToViewTime = $allowedToViewTime;
 
         return $this;
+    }
+
+    /**
+     * Helper that checks both {@see Lock::isAllowedToViewTime} and {@see Lock::getHideTimeLogs}.
+     */
+    public function canViewTime(): bool
+    {
+        return ($this->isAllowedToViewTime() ?? false) || !($this->getHideTimeLogs() ?? true);
     }
 
     public function isLockUnlockable(): ?bool
