@@ -2,8 +2,11 @@
 
 namespace Fake\ChasterObjects\Objects\Traits;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 trait LockIdTrait
 {
+    #[Assert\NotBlank]
     private ?string $lockId = null;
 
     public function getLockId(): ?string
