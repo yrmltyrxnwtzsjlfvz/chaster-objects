@@ -13,6 +13,7 @@ use Symfony\Component\Validator\Exception\ValidationFailedException;
 class LockIdTest extends TestCase
 {
     use TestFullValidatorTrait;
+    use TestLockIdNormalizationTrait;
 
     public function testLockId()
     {

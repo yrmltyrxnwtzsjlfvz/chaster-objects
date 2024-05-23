@@ -2,13 +2,17 @@
 
 namespace Fake\ChasterObjects\Objects\Lock;
 
+use DateTimeInterface;
 use Fake\ChasterObjects\Objects\Extension\Extension;
+use Fake\ChasterObjects\Objects\Interfaces\LockSessionInterface;
 use Fake\ChasterObjects\Objects\Traits\ChasterIdTrait;
+use Fake\ChasterObjects\Objects\Traits\LockIdNormalizerTrait;
 use Symfony\Component\Serializer\Annotation\SerializedName;
 
-class SharedLock
+class SharedLock implements LockSessionInterface
 {
     use ChasterIdTrait;
+    use LockIdNormalizerTrait;
 
     /**
      * @var int|null
@@ -26,17 +30,17 @@ class SharedLock
     private $maxLimitDuration;
 
     /**
-     * @var \DateTimeInterface|null
+     * @var DateTimeInterface|null
      */
     private $minDate;
 
     /**
-     * @var \DateTimeInterface|null
+     * @var DateTimeInterface|null
      */
     private $maxDate;
 
     /**
-     * @var \DateTimeInterface|null
+     * @var DateTimeInterface|null
      */
     private $maxLimitDate;
 
@@ -87,7 +91,7 @@ class SharedLock
     private $hideTimeLogs;
 
     /**
-     * @var \DateTimeInterface|null
+     * @var DateTimeInterface|null
      */
     private $lastSavedAt;
 
@@ -156,7 +160,7 @@ class SharedLock
         return $this;
     }
 
-    public function getMinDate(): ?\DateTimeInterface
+    public function getMinDate(): ?DateTimeInterface
     {
         return $this->minDate;
     }
@@ -164,14 +168,14 @@ class SharedLock
     /**
      * @return $this
      */
-    public function setMinDate(?\DateTimeInterface $minDate): static
+    public function setMinDate(?DateTimeInterface $minDate): static
     {
         $this->minDate = $minDate;
 
         return $this;
     }
 
-    public function getMaxDate(): ?\DateTimeInterface
+    public function getMaxDate(): ?DateTimeInterface
     {
         return $this->maxDate;
     }
@@ -179,14 +183,14 @@ class SharedLock
     /**
      * @return $this
      */
-    public function setMaxDate(?\DateTimeInterface $maxDate): static
+    public function setMaxDate(?DateTimeInterface $maxDate): static
     {
         $this->maxDate = $maxDate;
 
         return $this;
     }
 
-    public function getMaxLimitDate(): ?\DateTimeInterface
+    public function getMaxLimitDate(): ?DateTimeInterface
     {
         return $this->maxLimitDate;
     }
@@ -194,7 +198,7 @@ class SharedLock
     /**
      * @return $this
      */
-    public function setMaxLimitDate(?\DateTimeInterface $maxLimitDate): static
+    public function setMaxLimitDate(?DateTimeInterface $maxLimitDate): static
     {
         $this->maxLimitDate = $maxLimitDate;
 
@@ -336,7 +340,7 @@ class SharedLock
         return $this;
     }
 
-    public function getLastSavedAt(): ?\DateTimeInterface
+    public function getLastSavedAt(): ?DateTimeInterface
     {
         return $this->lastSavedAt;
     }
@@ -344,7 +348,7 @@ class SharedLock
     /**
      * @return $this
      */
-    public function setLastSavedAt(?\DateTimeInterface $lastSavedAt): static
+    public function setLastSavedAt(?DateTimeInterface $lastSavedAt): static
     {
         $this->lastSavedAt = $lastSavedAt;
 
@@ -421,11 +425,13 @@ class SharedLock
 
     /**
      * @param Extension[] $extensions
+     *
      * @return $this
      */
     public function setExtensions(array $extensions): self
     {
         $this->extensions = $extensions;
+
         return $this;
     }
 }

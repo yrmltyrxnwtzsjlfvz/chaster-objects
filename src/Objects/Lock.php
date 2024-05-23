@@ -20,6 +20,7 @@ use Fake\ChasterObjects\Objects\Lock\ReasonPreventingUnlocking;
 use Fake\ChasterObjects\Objects\Lock\SharedLock;
 use Fake\ChasterObjects\Objects\Traits\ChasterIdTrait;
 use Fake\ChasterObjects\Objects\Traits\CreatedAtTrait;
+use Fake\ChasterObjects\Objects\Traits\LockIdNormalizerTrait;
 use Fake\ChasterObjects\Objects\Traits\LockTrait;
 use Illuminate\Support\Arr;
 use Symfony\Component\Serializer\Annotation\SerializedName;
@@ -54,6 +55,7 @@ class Lock implements LockInterface, FormattedNameInterface
     use ChasterIdTrait;
     use CreatedAtTrait;
     use LockTrait;
+    use LockIdNormalizerTrait;
 
     /**
      * @var ChasterLockStatus|null
@@ -822,10 +824,5 @@ class Lock implements LockInterface, FormattedNameInterface
         $this->user = $user;
 
         return $this;
-    }
-
-    public static function normalizeToLockId(LockSessionInterface|string $lock): string
-    {
-        return $lock instanceof LockSessionInterface ? $lock->getId() : $lock;
     }
 }
