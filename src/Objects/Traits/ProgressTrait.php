@@ -304,6 +304,7 @@ trait ProgressTrait
         if (empty($this->unlockedAt)) {
             return null;
         }
+
         $unlocked = DateTimeHelper::toImmutableUTC($this->unlockedAt);
 
         return $start->diff($unlocked);
