@@ -1,11 +1,12 @@
-name: prerelease
+name: release
 
 on:
   push:
     tags:
-      - 'v*ALPHA*'
-      - 'v*BETA*'
-      - 'v*RC*'
+      - v*
+      - '!v*ALPHA*'
+      - '!v*BETA*'
+      - '!v*RC*'
   workflow_dispatch:
 
 jobs:
