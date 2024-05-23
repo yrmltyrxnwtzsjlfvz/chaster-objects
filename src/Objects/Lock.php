@@ -204,6 +204,7 @@ class Lock implements LockInterface, FormattedNameInterface
      * @var User|null
      */
     private $keyholder;
+
     private $isAllowedToViewTime = true;
 
     public function getStatus(): ?ChasterLockStatus
@@ -261,6 +262,7 @@ class Lock implements LockInterface, FormattedNameInterface
         if (is_null($this->getEndDate())) {
             return null;
         }
+
         $endDate = $this->isFrozen() ? DateTimeHelper::getNowUTC()->add($this->getFrozenAt()->diff($this->getEndDate())) : $this->getEndDate();
         if (!is_null($this->getMaxLimitDate())) {
             $endDate = min($endDate, $this->getMaxLimitDate());
@@ -721,11 +723,13 @@ class Lock implements LockInterface, FormattedNameInterface
         if ($n->equalsTo('hasAnyGame')) {
             return $this->hasExtension(ChasterExtension::DICE) || $this->hasExtension(ChasterExtension::WHEEL_OF_FORTUNE);
         }
+
         if ($n->startsWith(['get', 'has'])) {
             $var = $n->snake()->after('get_')->after('has_')->replace('_', '-')->toString();
             if ($n->startsWith('has')) {
                 return $this->hasExtension($var);
             }
+
             $return = Arr::first($this->extensions, function ($v) use ($var) {
                 return $v->getSlug() === $var;
             });
