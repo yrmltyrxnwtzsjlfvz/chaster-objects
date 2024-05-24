@@ -21,6 +21,8 @@ enum ChasterKeyholderActions: string implements StringBackedEnumInterface
     case REMOVE_TASK_POINTS = 'REMOVE_TASK_POINTS';
     case ADD_SHARE_LINKS = 'ADD_SHARE_LINKS';
     case REMOVE_SHARE_LINKS = 'REMOVE_SHARE_LINKS';
+    case UNLOCK = 'unlock';
+    case ARCHIVE = 'archive';
 
     public static function tryFromPunishment(string $value): ?ChasterKeyholderActions
     {
