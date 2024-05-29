@@ -89,7 +89,7 @@ class LockTest extends TestCase
         $this->assertEquals($expected, $result);
     }
 
-    public function testGetNowToLesserOfMaxOrEndIntervalPercentage()
+    public function testGetNowToLesserOfMaxOrEndPercentageInterval()
     {
         $clock = static::getClock();
         $now = $clock->now();
