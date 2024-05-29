@@ -4,10 +4,15 @@ namespace Fake\ChasterObjects\Objects\Traits;
 
 use Bytes\DateBundle\Helpers\DateTimeHelper;
 use Bytes\DateBundle\Objects\LargeComparableDateInterval;
+use DateInterval;
+use DateTime;
+use DateTimeInterface;
+use DateTimeZone;
+use Exception;
 
 trait ProgressTrait
 {
-    public function getStartToMaxSeconds(\DateTimeInterface $start = null): ?int
+    public function getStartToMaxSeconds(?DateTimeInterface $start = null): ?int
     {
         if ($this->hasStartToMaxInterval()) {
             return LargeComparableDateInterval::getTotalSeconds($this->getStartToMaxInterval());
@@ -21,7 +26,7 @@ trait ProgressTrait
         return $this->limitLockTime && !empty($this->maxLimitDate);
     }
 
-    public function getStartToMaxInterval(): ?\DateInterval
+    public function getStartToMaxInterval(): ?DateInterval
     {
         if ($this->hasStartToMaxInterval()) {
             return $this->startDate->diff($this->maxLimitDate);
@@ -59,12 +64,12 @@ trait ProgressTrait
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
-    public function getNowToEndInterval(bool $override = false): ?\DateInterval
+    public function getNowToEndInterval(bool $override = false, ?DateTimeInterface $now = null): ?DateInterval
     {
         if ($this->hasStartToEndInterval($override)) {
-            return (new \DateTime('now', new \DateTimeZone('UTC')))->diff($this->endDate);
+            return ($now ?? (new DateTime('now', new DateTimeZone('UTC'))))->diff($this->endDate);
         }
 
         return null;
@@ -86,7 +91,7 @@ trait ProgressTrait
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function getNowToEndHours(bool $override = false, string $roundingFunc = 'ceil'): ?int
     {
@@ -98,7 +103,26 @@ trait ProgressTrait
         return LargeComparableDateInterval::getTotalHours($interval, $roundingFunc);
     }
 
-    public function getNowToLesserOfMaxOrEndInterval(\DateInterval $other = null, bool $override = false): ?\DateInterval
+    public function getNowToLesserOfMaxOrEndInterval(?DateTimeInterface $now = null, bool $override = false): ?DateInterval
+    {
+        $hasStartToMax = $this->hasStartToMaxInterval();
+        $hasStartToEnd = $this->hasStartToEndInterval(override: $override);
+        if ($hasStartToMax && !$hasStartToEnd) {
+            $return = $this->getNowToMaxInterval(now: $now);
+        } elseif (!$hasStartToMax && $hasStartToEnd) {
+            $return = $this->getNowToEndInterval(override: $override, now: $now);
+        } elseif (!($hasStartToMax || $hasStartToEnd)) {
+            $return = null;
+        } else {
+            $startToMax = $this->getNowToMaxInterval(now: $now);
+            $startToEnd = $this->getNowToEndInterval(override: $override, now: $now);
+            $return = (LargeComparableDateInterval::getTotalSeconds($startToMax) > LargeComparableDateInterval::getTotalSeconds($startToEnd)) ? $startToEnd : $startToMax;
+        }
+
+        return $return;
+    }
+
+    public function getStartToLesserOfMaxOrEndInterval(?DateInterval $other = null, bool $override = false): ?DateInterval
     {
         $hasStartToMax = $this->hasStartToMaxInterval();
         $hasStartToEnd = $this->hasStartToEndInterval(override: $override);
@@ -121,7 +145,7 @@ trait ProgressTrait
         return (LargeComparableDateInterval::getTotalSeconds($return) > LargeComparableDateInterval::getTotalSeconds($other)) ? $other : $return;
     }
 
-    public function getStartToEndInterval(bool $override = false): ?\DateInterval
+    public function getStartToEndInterval(bool $override = false): ?DateInterval
     {
         if ($this->hasStartToEndInterval($override)) {
             return $this->startDate->diff($this->endDate);
@@ -131,9 +155,9 @@ trait ProgressTrait
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
-    public function getProgressPercentage(\DateTimeInterface $now = null): ?float
+    public function getProgressPercentage(?DateTimeInterface $now = null): ?float
     {
         if (!$this->hasStartToEndInterval()) {
             return null;
@@ -143,19 +167,19 @@ trait ProgressTrait
     }
 
     /**
-     * @return \DateInterval Interval between the start date and $now
+     * @return DateInterval Interval between the start date and $now
      *
-     * @throws \Exception
+     * @throws Exception
      */
-    public function getProgressInterval(\DateTimeInterface $now = null): \DateInterval
+    public function getProgressInterval(?DateTimeInterface $now = null): DateInterval
     {
-        return $this->startDate->diff($now ?? new \DateTime('now', new \DateTimeZone('UTC')));
+        return $this->startDate->diff($now ?? new DateTime('now', new DateTimeZone('UTC')));
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
-    public function getProgressToMaxPercentage(\DateTimeInterface $now = null): ?float
+    public function getProgressToMaxPercentage(?DateTimeInterface $now = null): ?float
     {
         if (!$this->hasStartToMaxInterval()) {
             return null;
@@ -174,7 +198,7 @@ trait ProgressTrait
         return LargeComparableDateInterval::getTotalSeconds($interval);
     }
 
-    public function getEndToMaxInterval(): ?\DateInterval
+    public function getEndToMaxInterval(): ?DateInterval
     {
         if (!$this->hasStartToMaxInterval()) {
             return null;
@@ -197,12 +221,12 @@ trait ProgressTrait
         return LargeComparableDateInterval::getTotalSeconds($interval);
     }
 
-    public function getNowToMaxInterval(\DateTimeInterface $now = null): ?\DateInterval
+    public function getNowToMaxInterval(?DateTimeInterface $now = null): ?DateInterval
     {
         if ($this->hasStartToMaxInterval()) {
             if (empty($now)) {
-                $now = new \DateTime();
-                $now->setTimezone(new \DateTimeZone('UTC'));
+                $now = new DateTime();
+                $now->setTimezone(new DateTimeZone('UTC'));
             }
 
             return $now->diff($this->maxLimitDate);
@@ -214,7 +238,7 @@ trait ProgressTrait
     /**
      * @param string $roundingFunc = ['ceil', 'floor', 'round'][$any]
      */
-    public function getNowToMaxHours(\DateTimeInterface $now = null, string $roundingFunc = 'ceil'): ?int
+    public function getNowToMaxHours(?DateTimeInterface $now = null, string $roundingFunc = 'ceil'): ?int
     {
         $interval = $this->getNowToMaxInterval($now);
         if (is_null($interval)) {
@@ -227,7 +251,7 @@ trait ProgressTrait
     /**
      * @param string $roundingFunc = ['ceil', 'floor', 'round'][$any]
      */
-    public function getNowToMaxMinutes(\DateTimeInterface $now = null, string $roundingFunc = 'ceil'): ?int
+    public function getNowToMaxMinutes(?DateTimeInterface $now = null, string $roundingFunc = 'ceil'): ?int
     {
         $interval = $this->getNowToMaxInterval($now);
         if (is_null($interval)) {
@@ -251,38 +275,38 @@ trait ProgressTrait
         return LargeComparableDateInterval::getTotalSeconds($interval);
     }
 
-    public function getStartToNowHours(\DateTimeInterface $start = null, \DateTimeInterface $now = null, string $roundingFunc = 'ceil'): int
+    public function getStartToNowHours(?DateTimeInterface $start = null, ?DateTimeInterface $now = null, string $roundingFunc = 'ceil'): int
     {
         return LargeComparableDateInterval::getTotalHours($this->getStartToNowInterval($start, $now), $roundingFunc);
     }
 
-    public function getStartToNowDays(\DateTimeInterface $start = null, \DateTimeInterface $now = null, string $roundingFunc = 'ceil'): int
+    public function getStartToNowDays(?DateTimeInterface $start = null, ?DateTimeInterface $now = null, string $roundingFunc = 'ceil'): int
     {
         return LargeComparableDateInterval::getTotalDays($this->getStartToNowInterval($start, $now), $roundingFunc);
     }
 
-    public function getStartToNowInterval(\DateTimeInterface $start = null, \DateTimeInterface $now = null): ?\DateInterval
+    public function getStartToNowInterval(?DateTimeInterface $start = null, ?DateTimeInterface $now = null): ?DateInterval
     {
         if (!empty($start)) {
-            $start = \DateTime::createFromInterface($start)->setTimezone(new \DateTimeZone('UTC'));
+            $start = DateTime::createFromInterface($start)->setTimezone(new DateTimeZone('UTC'));
         } else {
             $start = $this->startDate;
         }
 
         if (empty($now)) {
-            $now = new \DateTime();
-            $now->setTimezone(new \DateTimeZone('UTC'));
+            $now = new DateTime();
+            $now->setTimezone(new DateTimeZone('UTC'));
         }
 
         return $start->diff($now);
     }
 
-    public function getStartToNowMinutes(\DateTimeInterface $start = null, \DateTimeInterface $now = null, string $roundingFunc = 'ceil'): int
+    public function getStartToNowMinutes(?DateTimeInterface $start = null, ?DateTimeInterface $now = null, string $roundingFunc = 'ceil'): int
     {
         return LargeComparableDateInterval::getTotalMinutes($this->getStartToNowInterval($start, $now), $roundingFunc);
     }
 
-    public function getStartToNowSeconds(\DateTimeInterface $start = null, \DateTimeInterface $now = null): ?int
+    public function getStartToNowSeconds(?DateTimeInterface $start = null, ?DateTimeInterface $now = null): ?int
     {
         return LargeComparableDateInterval::getTotalSeconds($this->getStartToNowInterval($start, $now));
     }
@@ -297,7 +321,7 @@ trait ProgressTrait
         return LargeComparableDateInterval::getTotalHours($interval, $roundingFunc);
     }
 
-    public function getStartToUnlockedInterval(): ?\DateInterval
+    public function getStartToUnlockedInterval(): ?DateInterval
     {
         $start = DateTimeHelper::toImmutableUTC($this->startDate);
 
