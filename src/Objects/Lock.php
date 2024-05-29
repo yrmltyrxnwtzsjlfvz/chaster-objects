@@ -4,6 +4,7 @@ namespace Fake\ChasterObjects\Objects;
 
 use Bytes\DateBundle\Helpers\DateTimeHelper;
 use Bytes\DateBundle\Objects\ComparableDateInterval;
+use Bytes\DateBundle\Objects\LargeComparableDateInterval;
 use Bytes\StringMaskBundle\Twig\StringMaskRuntime;
 use DateInterval;
 use DateTime;
@@ -15,7 +16,6 @@ use Fake\ChasterObjects\Enums\LockRole;
 use Fake\ChasterObjects\Enums\ReasonPreventingUnlock;
 use Fake\ChasterObjects\Objects\Interfaces\FormattedNameInterface;
 use Fake\ChasterObjects\Objects\Interfaces\LockInterface;
-use Fake\ChasterObjects\Objects\Interfaces\LockSessionInterface;
 use Fake\ChasterObjects\Objects\Lock\ReasonPreventingUnlocking;
 use Fake\ChasterObjects\Objects\Lock\SharedLock;
 use Fake\ChasterObjects\Objects\Traits\ChasterIdTrait;
@@ -828,5 +828,15 @@ class Lock implements LockInterface, FormattedNameInterface
         $this->user = $user;
 
         return $this;
+    }
+
+    public function getNowToLesserOfMaxOrEndPercentageInterval(float $percentage, ?DateTimeInterface $now = null): ?DateInterval
+    {
+        $remaining = $this->getNowToLesserOfMaxOrEndInterval(now: $now);
+        if (is_null($remaining)) {
+            return null;
+        }
+
+        return LargeComparableDateInterval::normalizeToDateInterval(round(LargeComparableDateInterval::normalizeToSeconds($remaining) * $percentage));
     }
 }
