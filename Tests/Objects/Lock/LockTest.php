@@ -105,4 +105,31 @@ class LockTest extends TestCase
         $result = $lock->getNowToLesserOfMaxOrEndPercentageInterval(percentage: 0.05, now: $now);
         $this->assertEquals(new DateInterval('PT2M15S'), $result);
     }
+
+    /**
+     * @dataProvider provideUnlockable
+     * @param Lock $lock
+     * @param bool $unlockable
+     * @return void
+     */
+    public function testIsUnlockable($lock, $unlockable)
+    {
+        $this->assertEquals($unlockable, $lock->isUnlockable());
+    }
+
+    public static function provideUnlockable(): Generator
+    {
+        yield 'unlockable + max' => ['lock' => self::buildLockForIsUnlockable(true, true), 'unlockable' => true];
+        yield 'unlockable' => ['lock' => self::buildLockForIsUnlockable(true, false), 'unlockable' => true];
+        yield 'max' => ['lock' => self::buildLockForIsUnlockable(false, true), 'unlockable' => true];
+        yield 'none' => ['lock' => self::buildLockForIsUnlockable(false, false), 'unlockable' => false];
+    }
+
+    private static function buildLockForIsUnlockable(bool $lockUnlockable, bool $canBeUnlockedByMaxLimitDate): Lock
+    {
+        $lock = new Lock();
+        return $lock
+            ->setLockUnlockable($lockUnlockable)
+            ->setCanBeUnlockedByMaxLimitDate($canBeUnlockedByMaxLimitDate);
+    }
 }

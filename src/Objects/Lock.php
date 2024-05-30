@@ -365,7 +365,7 @@ class Lock implements LockInterface, FormattedNameInterface
 
     public function isUnlockable(): bool
     {
-        return /* $this->getCanBeUnlocked() && empty($this->getReasonsPreventingUnlocking())) || */ $this->getCanBeUnlockedByMaxLimitDate();
+        return $this->isLockUnlockable() || $this->getCanBeUnlockedByMaxLimitDate();
     }
 
     public function getCanBeUnlockedByMaxLimitDate(): ?bool
