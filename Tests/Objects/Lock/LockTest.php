@@ -145,11 +145,13 @@ class LockTest extends TestCase
         $lock = new Lock();
         $lock->setStartDate($start);
         $this->assertEquals(new DateInterval('PT1H'), $lock->getProgressInterval(now: $now));
+        $this->assertEquals(new DateInterval('PT1H'), $lock->getStartToNowInterval(now: $now));
     }
 
     public function testGetProgressIntervalNoStartDate()
     {
         $lock = new Lock();
         $this->assertNull($lock->getProgressInterval());
+        $this->assertNull($lock->getStartToNowInterval());
     }
 }

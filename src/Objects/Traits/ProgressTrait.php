@@ -299,6 +299,10 @@ trait ProgressTrait
             $start = $this->startDate;
         }
 
+        if(is_null($start)) {
+            return null;
+        }
+
         if (empty($now)) {
             $now = new DateTime();
             $now->setTimezone(new DateTimeZone('UTC'));
