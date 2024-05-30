@@ -2,7 +2,6 @@
 
 namespace Fake\ChasterObjects\Tests\Objects\Lock;
 
-use BadMethodCallException;
 use DateInterval;
 use Fake\ChasterObjects\Objects\Lock;
 use Generator;
@@ -146,6 +145,10 @@ class LockTest extends TestCase
         $lock->setStartDate($start);
         $this->assertEquals(new DateInterval('PT1H'), $lock->getProgressInterval(now: $now));
         $this->assertEquals(new DateInterval('PT1H'), $lock->getStartToNowInterval(now: $now));
+        // $this->assertEquals(3600, $lock->getStartToNowSeconds(now: $now));
+        $this->assertEquals(60, $lock->getStartToNowMinutes(now: $now));
+        $this->assertEquals(1, $lock->getStartToNowHours(now: $now));
+        $this->assertEquals(1, $lock->getStartToNowDays(now: $now));
     }
 
     public function testGetProgressIntervalNoStartDate()
@@ -153,5 +156,9 @@ class LockTest extends TestCase
         $lock = new Lock();
         $this->assertNull($lock->getProgressInterval());
         $this->assertNull($lock->getStartToNowInterval());
+        $this->assertNull($lock->getStartToNowSeconds());
+        $this->assertNull($lock->getStartToNowMinutes());
+        $this->assertNull($lock->getStartToNowHours());
+        $this->assertNull($lock->getStartToNowDays());
     }
 }

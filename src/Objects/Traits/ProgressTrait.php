@@ -281,14 +281,24 @@ trait ProgressTrait
         return LargeComparableDateInterval::getTotalSeconds($interval);
     }
 
-    public function getStartToNowHours(?DateTimeInterface $start = null, ?DateTimeInterface $now = null, string $roundingFunc = 'ceil'): int
+    public function getStartToNowHours(?DateTimeInterface $start = null, ?DateTimeInterface $now = null, string $roundingFunc = 'ceil'): ?int
     {
-        return LargeComparableDateInterval::getTotalHours($this->getStartToNowInterval($start, $now), $roundingFunc);
+        $interval = $this->getStartToNowInterval($start, $now);
+        if (is_null($interval)) {
+            return null;
+        }
+
+        return LargeComparableDateInterval::getTotalHours($interval, $roundingFunc);
     }
 
-    public function getStartToNowDays(?DateTimeInterface $start = null, ?DateTimeInterface $now = null, string $roundingFunc = 'ceil'): int
+    public function getStartToNowDays(?DateTimeInterface $start = null, ?DateTimeInterface $now = null, string $roundingFunc = 'ceil'): ?int
     {
-        return LargeComparableDateInterval::getTotalDays($this->getStartToNowInterval($start, $now), $roundingFunc);
+        $interval = $this->getStartToNowInterval($start, $now);
+        if (is_null($interval)) {
+            return null;
+        }
+
+        return LargeComparableDateInterval::getTotalDays($interval, $roundingFunc);
     }
 
     public function getStartToNowInterval(?DateTimeInterface $start = null, ?DateTimeInterface $now = null): ?DateInterval
@@ -299,7 +309,7 @@ trait ProgressTrait
             $start = $this->startDate;
         }
 
-        if(is_null($start)) {
+        if (is_null($start)) {
             return null;
         }
 
@@ -311,14 +321,22 @@ trait ProgressTrait
         return $start->diff($now);
     }
 
-    public function getStartToNowMinutes(?DateTimeInterface $start = null, ?DateTimeInterface $now = null, string $roundingFunc = 'ceil'): int
+    public function getStartToNowMinutes(?DateTimeInterface $start = null, ?DateTimeInterface $now = null, string $roundingFunc = 'ceil'): ?int
     {
+        $interval = $this->getStartToNowInterval();
+        if (is_null($interval)) {
+            return null;
+        }
         return LargeComparableDateInterval::getTotalMinutes($this->getStartToNowInterval($start, $now), $roundingFunc);
     }
 
     public function getStartToNowSeconds(?DateTimeInterface $start = null, ?DateTimeInterface $now = null): ?int
     {
-        return LargeComparableDateInterval::getTotalSeconds($this->getStartToNowInterval($start, $now));
+        $interval = $this->getStartToNowInterval();
+        if (is_null($interval)) {
+            return null;
+        }
+        return LargeComparableDateInterval::getTotalSeconds($interval);
     }
 
     public function getStartToUnlockedHours(string $roundingFunc = 'ceil'): ?int

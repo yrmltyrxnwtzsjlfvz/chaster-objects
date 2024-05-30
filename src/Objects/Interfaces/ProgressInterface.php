@@ -66,9 +66,9 @@ interface ProgressInterface
 
     public function getStartToEndSeconds(): int;
 
-    public function getStartToNowHours(?DateTimeInterface $start = null, ?DateTimeInterface $now = null, string $roundingFunc = 'ceil'): int;
+    public function getStartToNowHours(?DateTimeInterface $start = null, ?DateTimeInterface $now = null, string $roundingFunc = 'ceil'): ?int;
 
     public function getStartToNowInterval(?DateTimeInterface $start = null, ?DateTimeInterface $now = null): ?DateInterval;
 
-    public function getStartToNowMinutes(?DateTimeInterface $start = null, ?DateTimeInterface $now = null, string $roundingFunc = 'ceil'): int;
+    public function getStartToNowMinutes(?DateTimeInterface $start = null, ?DateTimeInterface $now = null, string $roundingFunc = 'ceil'): ?int;
 }
