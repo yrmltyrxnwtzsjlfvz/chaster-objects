@@ -34,12 +34,12 @@ interface ProgressInterface
     public function getProgressPercentage(?DateTimeInterface $now = null): ?float;
 
     /**
-     * @return DateInterval Interval between the start date and $now
+     * @param DateTimeInterface|null $now Interval between the start date and $now
      *
      * @throws Exception
      * @throws BadMethodCallException
      */
-    public function getProgressInterval(?DateTimeInterface $now = null): DateInterval;
+    public function getProgressInterval(?DateTimeInterface $now = null): ?DateInterval;
 
     /**
      * @throws Exception

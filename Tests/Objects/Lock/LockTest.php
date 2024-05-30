@@ -150,7 +150,6 @@ class LockTest extends TestCase
     public function testGetProgressIntervalNoStartDate()
     {
         $lock = new Lock();
-        $this->expectException(BadMethodCallException::class);
-        $lock->getProgressInterval();
+        $this->assertNull($lock->getProgressInterval());
     }
 }
