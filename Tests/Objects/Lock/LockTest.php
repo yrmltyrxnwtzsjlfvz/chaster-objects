@@ -2,6 +2,7 @@
 
 namespace Fake\ChasterObjects\Tests\Objects\Lock;
 
+use BadMethodCallException;
 use DateInterval;
 use Fake\ChasterObjects\Objects\Lock;
 use Generator;
@@ -108,8 +109,10 @@ class LockTest extends TestCase
 
     /**
      * @dataProvider provideUnlockable
+     *
      * @param Lock $lock
      * @param bool $unlockable
+     *
      * @return void
      */
     public function testIsUnlockable($lock, $unlockable)
@@ -128,8 +131,26 @@ class LockTest extends TestCase
     private static function buildLockForIsUnlockable(bool $lockUnlockable, bool $canBeUnlockedByMaxLimitDate): Lock
     {
         $lock = new Lock();
+
         return $lock
             ->setLockUnlockable($lockUnlockable)
             ->setCanBeUnlockedByMaxLimitDate($canBeUnlockedByMaxLimitDate);
+    }
+
+    public function testGetProgressInterval()
+    {
+        $clock = static::getClock();
+        $now = $clock->now();
+        $start = $now->sub(new DateInterval('PT1H'));
+        $lock = new Lock();
+        $lock->setStartDate($start);
+        $this->assertEquals(new DateInterval('PT1H'), $lock->getProgressInterval(now: $now));
+    }
+
+    public function testGetProgressIntervalNoStartDate()
+    {
+        $lock = new Lock();
+        $this->expectException(BadMethodCallException::class);
+        $lock->getProgressInterval();
     }
 }

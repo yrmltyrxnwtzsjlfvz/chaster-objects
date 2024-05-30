@@ -2,6 +2,7 @@
 
 namespace Fake\ChasterObjects\Objects\Interfaces;
 
+use BadMethodCallException;
 use DateInterval;
 use DateTimeInterface;
 use Exception;
@@ -36,6 +37,7 @@ interface ProgressInterface
      * @return DateInterval Interval between the start date and $now
      *
      * @throws Exception
+     * @throws BadMethodCallException
      */
     public function getProgressInterval(?DateTimeInterface $now = null): DateInterval;
 

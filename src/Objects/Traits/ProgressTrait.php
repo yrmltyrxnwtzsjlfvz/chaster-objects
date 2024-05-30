@@ -2,6 +2,7 @@
 
 namespace Fake\ChasterObjects\Objects\Traits;
 
+use BadMethodCallException;
 use Bytes\DateBundle\Helpers\DateTimeHelper;
 use Bytes\DateBundle\Objects\LargeComparableDateInterval;
 use DateInterval;
@@ -170,9 +171,14 @@ trait ProgressTrait
      * @return DateInterval Interval between the start date and $now
      *
      * @throws Exception
+     * @throws BadMethodCallException
      */
     public function getProgressInterval(?DateTimeInterface $now = null): DateInterval
     {
+        if (is_null($this->getStartDate())) {
+            throw new BadMethodCallException('Start date cannot be null.');
+        }
+
         return $this->startDate->diff($now ?? new DateTime('now', new DateTimeZone('UTC')));
     }
 
