@@ -327,6 +327,7 @@ trait ProgressTrait
         if (is_null($interval)) {
             return null;
         }
+
         return LargeComparableDateInterval::getTotalMinutes($this->getStartToNowInterval($start, $now), $roundingFunc);
     }
 
@@ -336,6 +337,7 @@ trait ProgressTrait
         if (is_null($interval)) {
             return null;
         }
+
         return LargeComparableDateInterval::getTotalSeconds($interval);
     }
 
