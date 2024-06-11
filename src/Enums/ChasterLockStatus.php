@@ -2,8 +2,11 @@
 
 namespace Fake\ChasterObjects\Enums;
 
+use BadMethodCallException;
 use Bytes\EnumSerializerBundle\Enums\StringBackedEnumInterface;
 use Bytes\EnumSerializerBundle\Enums\StringBackedEnumTrait;
+
+use function Symfony\Component\String\u;
 
 enum ChasterLockStatus: string implements StringBackedEnumInterface
 {
@@ -14,8 +17,12 @@ enum ChasterLockStatus: string implements StringBackedEnumInterface
     case DESERTED = 'deserted';
     case ARCHIVED = 'archived';
 
+    /**
+     * @deprecated Since v0.3.3, this function is deprecated
+     */
     public function getIcomoonIcon(): string
     {
+        trigger_deprecation('fake34526/chaster-objects', '0.3.3', 'The "%s()" method is deprecated', __METHOD__);
         return 'icon-'.$this->getIcon();
     }
 
@@ -36,6 +43,11 @@ enum ChasterLockStatus: string implements StringBackedEnumInterface
                 break;
         }
 
-        throw new \BadMethodCallException('Supplied case is not valid');
+        throw new BadMethodCallException('Supplied case is not valid');
+    }
+
+    public function formChoiceKey(): string
+    {
+        return u($this->name)->lower()->title();
     }
 }
