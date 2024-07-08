@@ -57,7 +57,7 @@ class ReasonPreventingUnlocking
         return $this;
     }
 
-    public static function create(string $reason, string $icon = null): static
+    public static function create(string $reason, ?string $icon = null): static
     {
         $static = new static();
 
@@ -70,10 +70,10 @@ class ReasonPreventingUnlocking
         return $message instanceof ReasonPreventingUnlocking ? $message : static::create(reason: $message);
     }
 
-    public function translate(TranslatorInterface $translator): self
+    public function translate(TranslatorInterface $translator, array $parameters = [], ?string $domain = null, ?string $locale = null): self
     {
         $id = 'chaster.requirements_to_unlock.'.$this->getReason();
-        $translation = $translator->trans($id);
+        $translation = $translator->trans(id: $id, parameters: $parameters, domain: $domain, locale: $locale);
         if ($translation === $id) {
             $translation = $this->getReason();
         }
