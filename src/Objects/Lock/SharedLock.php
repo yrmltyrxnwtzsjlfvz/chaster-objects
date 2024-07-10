@@ -220,6 +220,14 @@ class SharedLock implements LockSessionInterface
         return $this;
     }
 
+    /**
+     * Helper that checks both {@see SharedLock::getDisplayRemainingTime} and {@see SharedLock::getHideTimeLogs}.
+     */
+    public function canViewTime(): bool
+    {
+        return ($this->getDisplayRemainingTime() ?? false) || !($this->getHideTimeLogs() ?? true);
+    }
+
     public function getLimitLockTime(): ?bool
     {
         return $this->limitLockTime;
