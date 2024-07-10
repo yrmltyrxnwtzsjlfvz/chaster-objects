@@ -12,6 +12,7 @@ use DateTimeInterface;
 use DateTimeZone;
 use Fake\ChasterObjects\Enums\ChasterExtension;
 use Fake\ChasterObjects\Enums\ChasterLockStatus;
+use Fake\ChasterObjects\Enums\KeyholderUnavailable;
 use Fake\ChasterObjects\Enums\LockRole;
 use Fake\ChasterObjects\Enums\ReasonPreventingUnlock;
 use Fake\ChasterObjects\Objects\Interfaces\FormattedNameInterface;
@@ -128,6 +129,8 @@ class Lock implements LockInterface, FormattedNameInterface
      */
     private $reasonsPreventingUnlocking = [];
 
+    private ?bool $extensionsAllowUnlocking = null;
+
     /**
      * @var DateTimeInterface|null
      */
@@ -204,6 +207,8 @@ class Lock implements LockInterface, FormattedNameInterface
      * @var User|null
      */
     private $keyholder;
+
+    private ?KeyholderUnavailable $keyholderUnavailable = null;
 
     private $isAllowedToViewTime = true;
 
@@ -365,7 +370,7 @@ class Lock implements LockInterface, FormattedNameInterface
 
     public function isUnlockable(): bool
     {
-        return $this->isLockUnlockable() || $this->getCanBeUnlockedByMaxLimitDate();
+        return ($this->isLockUnlockable() || $this->getCanBeUnlockedByMaxLimitDate()) && $this->getExtensionsAllowUnlocking();
     }
 
     public function getCanBeUnlockedByMaxLimitDate(): ?bool
@@ -445,6 +450,17 @@ class Lock implements LockInterface, FormattedNameInterface
     {
         $this->reasonsPreventingUnlocking = $reasonsPreventingUnlocking;
 
+        return $this;
+    }
+
+    public function getExtensionsAllowUnlocking(): ?bool
+    {
+        return $this->extensionsAllowUnlocking;
+    }
+
+    public function setExtensionsAllowUnlocking(?bool $extensionsAllowUnlocking): static
+    {
+        $this->extensionsAllowUnlocking = $extensionsAllowUnlocking;
         return $this;
     }
 
@@ -803,6 +819,17 @@ class Lock implements LockInterface, FormattedNameInterface
     {
         $this->keyholder = $keyholder;
 
+        return $this;
+    }
+
+    public function getKeyholderUnavailable(): ?KeyholderUnavailable
+    {
+        return $this->keyholderUnavailable;
+    }
+
+    public function setKeyholderUnavailable(KeyholderUnavailable|string|null $keyholderUnavailable): static
+    {
+        $this->keyholderUnavailable = !is_null($keyholderUnavailable) ? KeyholderUnavailable::tryNormalizeToEnum($keyholderUnavailable) : null;
         return $this;
     }
 

@@ -3,6 +3,9 @@
 namespace Fake\ChasterObjects\Objects\Lock;
 
 use Fake\ChasterObjects\Enums\ReasonPreventingUnlock;
+
+use function Symfony\Component\String\u;
+
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ReasonPreventingUnlocking
@@ -19,7 +22,7 @@ class ReasonPreventingUnlocking
 
     public function __toString(): string
     {
-        return $this->getReason();
+        return $this->getReason() ?? '';
     }
 
     public function getReason(): ?string
@@ -29,7 +32,7 @@ class ReasonPreventingUnlocking
 
     public function getReasonEnum(): ?ReasonPreventingUnlock
     {
-        return ReasonPreventingUnlock::tryFrom($this->reason);
+        return !is_null($this->reason) ? ReasonPreventingUnlock::tryFrom($this->reason) : null;
     }
 
     /**
@@ -52,7 +55,8 @@ class ReasonPreventingUnlocking
      */
     public function setIcon(?string $icon): static
     {
-        $this->icon = !empty($icon) ? 'fa-solid fa-'.$icon : $icon;
+        $i = u($icon);
+        $this->icon = !$i->isEmpty() ? $i->ensureStart('fa-solid fa-')->toString() : $icon;
 
         return $this;
     }
@@ -72,6 +76,10 @@ class ReasonPreventingUnlocking
 
     public function translate(TranslatorInterface $translator, array $parameters = [], ?string $domain = null, ?string $locale = null): self
     {
+        if (empty($this->getReason())) {
+            return $this;
+        }
+
         $id = 'chaster.requirements_to_unlock.'.$this->getReason();
         $translation = $translator->trans(id: $id, parameters: $parameters, domain: $domain, locale: $locale);
         if ($translation === $id) {
