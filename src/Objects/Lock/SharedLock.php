@@ -7,7 +7,9 @@ use Fake\ChasterObjects\Objects\Extension\Extension;
 use Fake\ChasterObjects\Objects\Interfaces\LockSessionInterface;
 use Fake\ChasterObjects\Objects\Traits\ChasterIdTrait;
 use Fake\ChasterObjects\Objects\Traits\LockIdNormalizerTrait;
+use SensitiveParameter;
 use Symfony\Component\Serializer\Annotation\SerializedName;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class SharedLock implements LockSessionInterface
 {
@@ -100,6 +102,9 @@ class SharedLock implements LockSessionInterface
      */
     private $requirePassword;
 
+    #[Assert\NotBlank]
+    private ?string $password = null;
+
     /**
      * @var string|null
      */
@@ -114,6 +119,14 @@ class SharedLock implements LockSessionInterface
      * @var Extension[]
      */
     private $extensions = [];
+
+    /**
+     * @var string[]
+     */
+    private array $tags = [];
+
+    #[SerializedName('isFindom')]
+    private ?bool $findom = null;
 
     public function getMinDuration(): ?int
     {
@@ -378,6 +391,36 @@ class SharedLock implements LockSessionInterface
         return $this;
     }
 
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param string|null $password
+     *
+     * @return $this
+     */
+    public function setPassword(#[SensitiveParameter] ?string $password): static
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Helper method that sets the password and requirePassword fields.
+     *
+     * @param string|null $password
+     *
+     * @return $this
+     */
+    public function setPasswordRequired(#[SensitiveParameter] ?string $password = null): static
+    {
+        return $this->setPassword($password)
+            ->setRequirePassword(!empty($password));
+    }
+
     public function getDurationMode(): ?string
     {
         return $this->durationMode;
@@ -439,6 +482,39 @@ class SharedLock implements LockSessionInterface
     public function setExtensions(array $extensions): self
     {
         $this->extensions = $extensions;
+
+        return $this;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getTags(): array
+    {
+        return $this->tags;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setTags(array $tags): self
+    {
+        $this->tags = $tags;
+
+        return $this;
+    }
+
+    public function isFindom(): ?bool
+    {
+        return $this->findom;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setFindom(?bool $findom): self
+    {
+        $this->findom = $findom;
 
         return $this;
     }
