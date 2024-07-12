@@ -109,31 +109,33 @@ class LockTest extends TestCase
     /**
      * @dataProvider provideUnlockable
      *
-     * @param Lock $lock
-     * @param bool $unlockable
+     * @param bool $lockUnlockable
+     * @param bool $extensionsAllowUnlocking
+     * @param bool $maxLimitDate
+     * @param bool $expected
      *
      * @return void
      */
-    public function testIsUnlockable($lock, $unlockable)
+    public function testUnlockable($lockUnlockable, $extensionsAllowUnlocking, $maxLimitDate, $expected)
     {
-        $this->assertEquals($unlockable, $lock->isUnlockable());
+        $lock = new Lock();
+        $lock->setLockUnlockable($lockUnlockable)
+            ->setExtensionsAllowUnlocking($extensionsAllowUnlocking)
+            ->setCanBeUnlockedByMaxLimitDate($maxLimitDate);
+
+        self::assertSame($expected, $lock->isUnlockable());
     }
 
     public static function provideUnlockable(): Generator
     {
-        yield 'unlockable + max' => ['lock' => self::buildLockForIsUnlockable(true, true), 'unlockable' => true];
-        yield 'unlockable' => ['lock' => self::buildLockForIsUnlockable(true, false), 'unlockable' => true];
-        yield 'max' => ['lock' => self::buildLockForIsUnlockable(false, true), 'unlockable' => true];
-        yield 'none' => ['lock' => self::buildLockForIsUnlockable(false, false), 'unlockable' => false];
-    }
-
-    private static function buildLockForIsUnlockable(bool $lockUnlockable, bool $canBeUnlockedByMaxLimitDate): Lock
-    {
-        $lock = new Lock();
-
-        return $lock
-            ->setLockUnlockable($lockUnlockable)
-            ->setCanBeUnlockedByMaxLimitDate($canBeUnlockedByMaxLimitDate);
+        yield ['lockUnlockable' => false, 'extensionsAllowUnlocking' => false, 'maxLimitDate' => false, 'expected' => false];
+        yield ['lockUnlockable' => true, 'extensionsAllowUnlocking' => false, 'maxLimitDate' => false, 'expected' => false];
+        yield ['lockUnlockable' => false, 'extensionsAllowUnlocking' => true, 'maxLimitDate' => false, 'expected' => false];
+        yield ['lockUnlockable' => true, 'extensionsAllowUnlocking' => true, 'maxLimitDate' => false, 'expected' => true];
+        yield ['lockUnlockable' => false, 'extensionsAllowUnlocking' => false, 'maxLimitDate' => true, 'expected' => true];
+        yield ['lockUnlockable' => true, 'extensionsAllowUnlocking' => false, 'maxLimitDate' => true, 'expected' => true];
+        yield ['lockUnlockable' => false, 'extensionsAllowUnlocking' => true, 'maxLimitDate' => true, 'expected' => true];
+        yield ['lockUnlockable' => true, 'extensionsAllowUnlocking' => true, 'maxLimitDate' => true, 'expected' => true];
     }
 
     public function testGetProgressInterval()
