@@ -3,6 +3,7 @@
 namespace Fake\ChasterObjects\Objects\Lock;
 
 use DateTimeInterface;
+use Fake\ChasterObjects\Enums\SharedLockDurationMode;
 use Fake\ChasterObjects\Objects\Extension\Extension;
 use Fake\ChasterObjects\Objects\Interfaces\LockSessionInterface;
 use Fake\ChasterObjects\Objects\Traits\ChasterIdTrait;
@@ -108,7 +109,7 @@ class SharedLock implements LockSessionInterface
     /**
      * @var string|null
      */
-    private $durationMode;
+    private ?SharedLockDurationMode $durationMode = SharedLockDurationMode::DURATION;
 
     /**
      * @var int|null
@@ -173,6 +174,13 @@ class SharedLock implements LockSessionInterface
         return $this;
     }
 
+    public function clearDurations(): static
+    {
+        return $this->setMinDuration(1)
+            ->setMaxDuration(1)
+            ->setMaxLimitDuration(null);
+    }
+
     public function getMinDate(): ?DateTimeInterface
     {
         return $this->minDate;
@@ -216,6 +224,13 @@ class SharedLock implements LockSessionInterface
         $this->maxLimitDate = $maxLimitDate;
 
         return $this;
+    }
+
+    public function clearDates(): static
+    {
+        return $this->setMinDate(null)
+            ->setMaxDate(null)
+            ->setMaxLimitDate(null);
     }
 
     public function getDisplayRemainingTime(): ?bool
@@ -421,7 +436,7 @@ class SharedLock implements LockSessionInterface
             ->setRequirePassword(!empty($password));
     }
 
-    public function getDurationMode(): ?string
+    public function getDurationMode(): ?SharedLockDurationMode
     {
         return $this->durationMode;
     }
@@ -429,11 +444,20 @@ class SharedLock implements LockSessionInterface
     /**
      * @return $this
      */
-    public function setDurationMode(?string $durationMode): static
+    public function setDurationMode(SharedLockDurationMode|string|null $durationMode): static
     {
-        $this->durationMode = $durationMode;
+        $this->durationMode = !is_null($durationMode) ? SharedLockDurationMode::normalizeToEnum($durationMode) : null;
 
         return $this;
+    }
+
+    /**
+     * Helper function that sets the correct duration mode dependant on the min/max date fields
+     * @return $this
+     */
+    public function setupDurationMode(): static
+    {
+        return $this->setDurationMode((!is_null($this->getMinDate()) && !is_null($this->getMaxDate())) ? SharedLockDurationMode::DATE : SharedLockDurationMode::DURATION);
     }
 
     public function getCalculatedMaxLimitDuration(): ?int
