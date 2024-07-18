@@ -135,4 +135,47 @@ class SharedLockTest extends TestCase
 
         self::assertSame($expectedDurationMode, $lock->getDurationMode());
     }
+
+    /**
+     * @dataProvider provideCanViewTime
+     *
+     * @return void
+     */
+    public function testCanViewTime($displayRemainingTime, $hideTimeLogs, $expected)
+    {
+        $lock = new SharedLock();
+        $lock->setDisplayRemainingTime($displayRemainingTime)
+            ->setHideTimeLogs($hideTimeLogs);
+
+        self::assertSame($expected, $lock->canViewTime());
+    }
+
+    public static function provideCanViewTime(): Generator
+    {
+        yield ['displayRemainingTime' => true, 'hideTimeLogs' => true, 'expected' => true];
+        yield ['displayRemainingTime' => true, 'hideTimeLogs' => false, 'expected' => true];
+        yield ['displayRemainingTime' => false, 'hideTimeLogs' => true, 'expected' => false];
+        yield ['displayRemainingTime' => false, 'hideTimeLogs' => false, 'expected' => true];
+        yield ['displayRemainingTime' => null, 'hideTimeLogs' => null, 'expected' => false];
+    }
+
+    /**
+     * @dataProvider providePasswordRequired
+     *
+     * @return void
+     */
+    public function testPasswordRequired($password, $expected)
+    {
+        $lock = new SharedLock();
+        $lock->setPasswordRequired($password);
+
+        self::assertSame($expected, $lock->getRequirePassword());
+    }
+
+    public static function providePasswordRequired(): Generator
+    {
+        yield ['password' => null, 'expected' => false];
+        yield ['password' => '', 'expected' => false];
+        yield ['password' => Factory::create()->password(), 'expected' => true];
+    }
 }

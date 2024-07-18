@@ -83,8 +83,8 @@ final class SharedLockFactory extends ObjectFactory
     protected function initialize(): static
     {
         return $this
-            ->afterInstantiate(function(SharedLock $sharedLock): void {
-                if($sharedLock->getDurationMode()->equals(SharedLockDurationMode::DURATION)) {
+            ->afterInstantiate(function (SharedLock $sharedLock): void {
+                if ($sharedLock->getDurationMode()->equals(SharedLockDurationMode::DURATION)) {
                     $sharedLock->clearDates()
                     ->setLimitLockTime(!empty($sharedLock->getMaxLimitDuration()));
                 } else {
