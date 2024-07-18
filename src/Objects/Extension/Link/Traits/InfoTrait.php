@@ -1,7 +1,8 @@
 <?php
 
-namespace Fake\ChasterObjects\Objects\Extension\Link;
+namespace Fake\ChasterObjects\Objects\Extension\Link\Traits;
 
+use Fake\ChasterObjects\Objects\Extension\Link\Info;
 use Symfony\Component\Serializer\Annotation\SerializedName;
 
 trait InfoTrait

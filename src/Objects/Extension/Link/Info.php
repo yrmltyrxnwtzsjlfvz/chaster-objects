@@ -2,9 +2,10 @@
 
 namespace Fake\ChasterObjects\Objects\Extension\Link;
 
-use Symfony\Component\Serializer\Annotation\SerializedName;
+use Fake\ChasterObjects\Objects\Extension\Link\Interfaces\InfoInterface;
+use Fake\ChasterObjects\Objects\Extension\Link\Traits\InfoTrait;
 
-class Info
+class Info implements InfoInterface
 {
     use InfoTrait;
 }
