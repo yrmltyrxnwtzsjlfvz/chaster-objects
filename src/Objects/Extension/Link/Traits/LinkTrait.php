@@ -2,7 +2,7 @@
 
 namespace Fake\ChasterObjects\Objects\Extension\Link\Traits;
 
-use Fake\ChasterObjects\Objects\Extension\Link\Link;
+use Fake\ChasterObjects\Objects\Extension\Link\Interfaces\LinkInterface;
 
 trait LinkTrait
 {
@@ -26,16 +26,16 @@ trait LinkTrait
     /**
      * @return $this
      */
-    public function setFromLink(Link|string|null $link): static
+    public function setFromLink(LinkInterface|string|null $link): static
     {
-        if ($link instanceof Link) {
+        if ($link instanceof LinkInterface) {
             $link = $link->getLink();
         }
 
         return $this->setLink($link);
     }
 
-    public static function createFromLink(Link|string|null $link): static
+    public static function createFromLink(LinkInterface|string|null $link): static
     {
         return (new static())->setFromLink(link: $link);
     }

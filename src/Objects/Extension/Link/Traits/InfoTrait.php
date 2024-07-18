@@ -2,7 +2,7 @@
 
 namespace Fake\ChasterObjects\Objects\Extension\Link\Traits;
 
-use Fake\ChasterObjects\Objects\Extension\Link\Info;
+use Fake\ChasterObjects\Objects\Extension\Link\Interfaces\InfoInterface;
 use Symfony\Component\Serializer\Annotation\SerializedName;
 
 trait InfoTrait
@@ -62,9 +62,9 @@ trait InfoTrait
     /**
      * @return $this
      */
-    public function setFromInfo(Info|bool|null $vote, ?int $minVotes = null, ?int $votes = null): static
+    public function setFromInfo(InfoInterface|bool|null $vote, ?int $minVotes = null, ?int $votes = null): static
     {
-        if ($vote instanceof Info) {
+        if ($vote instanceof InfoInterface) {
             $minVotes = $vote->getMinVotes();
             $votes = $vote->getVotes();
             $vote = $vote->canVote();
@@ -75,7 +75,7 @@ trait InfoTrait
             ->setVotes($votes);
     }
 
-    public static function createFromInfo(Info|bool|null $vote, ?int $minVotes = null, ?int $votes = null): static
+    public static function createFromInfo(InfoInterface|bool|null $vote, ?int $minVotes = null, ?int $votes = null): static
     {
         return (new static())->setFromInfo(vote: $vote, minVotes: $minVotes, votes: $votes);
     }
