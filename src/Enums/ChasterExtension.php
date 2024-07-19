@@ -20,25 +20,35 @@ enum ChasterExtension: string implements StringBackedEnumInterface
 {
     use StringBackedEnumTrait;
 
+    case BETTER_DICE = 'better-dice';
+    case BETTER_RANDOM_EVENTS = 'better-random-events';
     case DICE = 'dice';
+    case FIND_THE_KEY_1 = 'find-the-key-1';
     case GUESS_TIMER = 'guess-timer';
+    case JIGSAW_PUZZLE = 'jigsaw-puzzle';
     case LINK = 'link';
     case PENALTY = 'penalty';
     case PILLORY = 'pillory';
     case RANDOM_EVENTS = 'random-events';
     case TASKS = 'tasks';
     case TEMPORARY_OPENING = 'temporary-opening';
+    case UNLOCK_CONDITION = 'unlock-condition';
     case VERIFICATION_PICTURE = 'verification-picture';
     case WHEEL_OF_FORTUNE = 'wheel-of-fortune';
+    case WORDLE = 'wordle';
 
     public static function getFormChoiceKey(UnitEnum $value): string
     {
         return match ($value) {
-            ChasterExtension::GUESS_TIMER => 'Guess the timer',
+            ChasterExtension::FIND_THE_KEY_1 => 'Find The Key',
+            ChasterExtension::GUESS_TIMER => 'Guess the Timer',
             ChasterExtension::LINK => 'Share links',
+            ChasterExtension::PENALTY => 'Penalties',
             ChasterExtension::TEMPORARY_OPENING => 'Hygiene opening',
+            ChasterExtension::UNLOCK_CONDITION => 'Unlock Gamble',
+            ChasterExtension::VERIFICATION_PICTURE => 'Verification picture',
             ChasterExtension::WHEEL_OF_FORTUNE => 'Wheel of Fortune',
-            default => u($value->name)->lower()->replace('_', ' ')->title(false)->toString(),
+            default => u($value->name)->lower()->replace('_', ' ')->title(true)->toString(),
         };
     }
 
@@ -63,8 +73,12 @@ enum ChasterExtension: string implements StringBackedEnumInterface
     public static function getGameExtensions(): array
     {
         return [
+            ChasterExtension::BETTER_DICE,
             ChasterExtension::DICE,
+            ChasterExtension::FIND_THE_KEY_1,
+            ChasterExtension::JIGSAW_PUZZLE,
             ChasterExtension::WHEEL_OF_FORTUNE,
+            ChasterExtension::WORDLE,
         ];
     }
 
@@ -126,16 +140,21 @@ enum ChasterExtension: string implements StringBackedEnumInterface
     public function getIcon(): string
     {
         return match ($this) {
-            ChasterExtension::DICE => 'fa-solid fa-dice',
+            ChasterExtension::BETTER_DICE, ChasterExtension::DICE => 'fa-solid fa-dice',
+            ChasterExtension::BETTER_RANDOM_EVENTS => 'fa-solid fa-shuffle',
+            ChasterExtension::FIND_THE_KEY_1 => 'fa-solid fa-key',
             ChasterExtension::GUESS_TIMER => 'fa-solid fa-clock',
+            ChasterExtension::JIGSAW_PUZZLE => 'fa-solid fa-puzzle-piece',
             ChasterExtension::LINK => 'fa-solid fa-link',
             ChasterExtension::PENALTY => 'fa-solid fa-gavel',
             ChasterExtension::PILLORY => 'icon-dominatrix-whip-alt',
-            ChasterExtension::RANDOM_EVENTS => 'fa-solid fa-shuffle',
+            ChasterExtension::RANDOM_EVENTS => 'fa-solid fa-random',
             ChasterExtension::TASKS => 'fa-solid fa-tasks',
             ChasterExtension::TEMPORARY_OPENING => 'fa-solid fa-soap',
+            ChasterExtension::UNLOCK_CONDITION => 'fa-solid fa-traffic-light-slow',
             ChasterExtension::VERIFICATION_PICTURE => 'fa-solid fa-camera',
             ChasterExtension::WHEEL_OF_FORTUNE => 'icon-wheel-of-fortune',
+            ChasterExtension::WORDLE => 'fa-solid fa-border-all',
             default => throw new ValueError(),
         };
     }
