@@ -35,6 +35,7 @@ enum ChasterExtension: string implements StringBackedEnumInterface
     {
         return match ($value) {
             ChasterExtension::GUESS_TIMER => 'Guess the timer',
+            ChasterExtension::LINK => 'Share links',
             ChasterExtension::TEMPORARY_OPENING => 'Hygiene opening',
             ChasterExtension::WHEEL_OF_FORTUNE => 'Wheel of Fortune',
             default => u($value->name)->lower()->replace('_', ' ')->title(false)->toString(),
