@@ -141,6 +141,7 @@ class ExtensionPublic
 
     /**
      * @param ExtensionMode[] $availableModes
+     *
      * @return $this
      */
     public function setAvailableModes(array $availableModes): static

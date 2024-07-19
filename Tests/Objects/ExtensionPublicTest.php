@@ -157,7 +157,7 @@ class ExtensionPublicTest extends TestCase
 
     /**
      * @dataProvider provideText
-     * @param $text
+     *
      * @return void
      */
     public function testGetSetConfigIframeUrl($text)
@@ -171,8 +171,7 @@ class ExtensionPublicTest extends TestCase
 
     /**
      * @dataProvider provideAvailableModes
-     * @param $modes
-     * @param $expectedCount
+     *
      * @return void
      */
     public function testGetSetAvailableModes($modes, $expectedCount)
@@ -194,7 +193,7 @@ class ExtensionPublicTest extends TestCase
 
     /**
      * @dataProvider provideText
-     * @param $text
+     *
      * @return void
      */
     public function testGetSetPartnerExtensionId($text)
@@ -208,7 +207,7 @@ class ExtensionPublicTest extends TestCase
 
     /**
      * @dataProvider provideText
-     * @param $text
+     *
      * @return void
      */
     public function testGetSetSummary($text)
@@ -222,7 +221,7 @@ class ExtensionPublicTest extends TestCase
 
     /**
      * @dataProvider provideText
-     * @param $text
+     *
      * @return void
      */
     public function testGetSetIcon($text)
@@ -236,7 +235,7 @@ class ExtensionPublicTest extends TestCase
 
     /**
      * @dataProvider provideText
-     * @param $text
+     *
      * @return void
      */
     public function testGetSetSubtitle($text)
@@ -250,7 +249,7 @@ class ExtensionPublicTest extends TestCase
 
     /**
      * @dataProvider provideText
-     * @param $text
+     *
      * @return void
      */
     public function testGetSetDisplayName($text)
@@ -264,7 +263,7 @@ class ExtensionPublicTest extends TestCase
 
     /**
      * @dataProvider provideText
-     * @param $text
+     *
      * @return void
      */
     public function testGetSetSlug($text)
