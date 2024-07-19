@@ -2,9 +2,9 @@
 
 namespace Fake\ChasterObjects\Tests\Objects\Lock;
 
+use Fake\ChasterFactory\Factory\ReasonPreventingUnlockingFactory;
 use Fake\ChasterObjects\Enums\ReasonPreventingUnlock;
 use Fake\ChasterObjects\Objects\Lock\ReasonPreventingUnlocking;
-use Fake\ChasterObjects\Tests\Factory\ReasonPreventingUnlockingFactory;
 use Faker\Factory;
 use Generator;
 use PHPUnit\Framework\TestCase;

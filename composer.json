@@ -10,6 +10,7 @@
         "mrgoodbytes8667/string-mask-bundle": "^1.0"
     },
     "require-dev": {
+        "fake34526/chaster-factory": "*",
         "friendsofphp/php-cs-fixer": "^3.4",
         "mrgoodbytes8667/test-common": "^0.2.5 | ^0.3 | ^0.4.2",
         "rector/rector": "^1.0",
@@ -34,5 +35,11 @@
             "Fake\\ChasterObjects\\Tests\\": "Tests/"
         }
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/yrmltyrxnwtzsjlfvz/chaster-factory.git"
+        }
+    ]
 }

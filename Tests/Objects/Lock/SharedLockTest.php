@@ -2,9 +2,9 @@
 
 namespace Fake\ChasterObjects\Tests\Objects\Lock;
 
+use Fake\ChasterFactory\Factory\SharedLockFactory;
 use Fake\ChasterObjects\Enums\SharedLockDurationMode;
 use Fake\ChasterObjects\Objects\Lock\SharedLock;
-use Fake\ChasterObjects\Tests\Factory\SharedLockFactory;
 use Faker\Factory;
 use Generator;
 use PHPUnit\Framework\TestCase;

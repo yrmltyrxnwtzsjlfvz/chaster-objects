@@ -3,17 +3,22 @@
 namespace Fake\ChasterObjects\Tests\Objects\Lock;
 
 use DateInterval;
+use Fake\ChasterFactory\Factory\LockFactory;
 use Fake\ChasterObjects\Objects\Lock;
+use Fake\ChasterObjects\Tests\Story\KeyholderWearerStory;
 use Generator;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Clock\Clock;
 use Symfony\Component\Clock\MockClock;
+use Zenstruck\Foundry\Test\Factories;
 
 /**
  * @see Lock
  */
 class LockTest extends TestCase
 {
+    use Factories;
+
     public static function provideGetStartToLesserOfMaxOrEndInterval(): Generator
     {
         $clock = static::getClock();
@@ -162,5 +167,13 @@ class LockTest extends TestCase
         $this->assertNull($lock->getStartToNowMinutes());
         $this->assertNull($lock->getStartToNowHours());
         $this->assertNull($lock->getStartToNowDays());
+    }
+
+    public function testShit()
+    {
+        KeyholderWearerStory::load();
+        $object = LockFactory::createOne(['user' => KeyholderWearerStory::getRandom('wearer'), 'keyholder' => KeyholderWearerStory::getRandom('keyholder')]);
+        dump($object);
+        self::assertSame('', $object->getStatus());
     }
 }

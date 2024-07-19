@@ -2,8 +2,8 @@
 
 namespace Fake\ChasterObjects\Tests\Objects\Extension\Link;
 
+use Fake\ChasterFactory\Factory\SharedLinkInfoFactory;
 use Fake\ChasterObjects\Objects\Extension\Link\Info;
-use Fake\ChasterObjects\Tests\Factory\SharedLinkInfoFactory;
 use PHPUnit\Framework\TestCase;
 
 class InfoTest extends TestCase

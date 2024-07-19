@@ -2,8 +2,8 @@
 
 namespace Fake\ChasterObjects\Tests\Objects\SharedLockTags;
 
+use Fake\ChasterFactory\Factory\SharedLockTagFactory;
 use Fake\ChasterObjects\Objects\SharedLockTags\SharedLockTag;
-use Fake\ChasterObjects\Tests\Factory\SharedLockTagFactory;
 use Faker\Factory;
 use Generator;
 use Illuminate\Support\Arr;
