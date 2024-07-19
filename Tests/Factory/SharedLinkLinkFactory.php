@@ -26,6 +26,7 @@ final class SharedLinkLinkFactory extends ObjectFactory
     protected function defaults(): array|callable
     {
         $link = self::faker()->url();
+
         return [
             'link' => $link,
         ];

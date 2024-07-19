@@ -461,6 +461,7 @@ class Lock implements LockInterface, FormattedNameInterface
     public function setExtensionsAllowUnlocking(?bool $extensionsAllowUnlocking): static
     {
         $this->extensionsAllowUnlocking = $extensionsAllowUnlocking;
+
         return $this;
     }
 
@@ -830,6 +831,7 @@ class Lock implements LockInterface, FormattedNameInterface
     public function setKeyholderUnavailable(KeyholderUnavailable|string|null $keyholderUnavailable): static
     {
         $this->keyholderUnavailable = !is_null($keyholderUnavailable) ? KeyholderUnavailable::tryNormalizeToEnum($keyholderUnavailable) : null;
+
         return $this;
     }
 

@@ -2,6 +2,7 @@
 
 namespace Fake\ChasterObjects\Objects;
 
+use DateTimeInterface;
 use Fake\ChasterObjects\Objects\Traits\ExtensionTrait;
 use Symfony\Component\Serializer\Annotation\SerializedName;
 
@@ -41,17 +42,17 @@ class ExtensionParty
     private $nbActionsRemaining;
 
     /**
-     * @var \DateTimeInterface|null
+     * @var DateTimeInterface|null
      */
     private $nextActionDate;
 
     /**
-     * @var \DateTimeInterface|null
+     * @var DateTimeInterface|null
      */
     private $createdAt;
 
     /**
-     * @var \DateTimeInterface|null
+     * @var DateTimeInterface|null
      */
     private $updatedAt;
 
@@ -147,7 +148,7 @@ class ExtensionParty
         return $this;
     }
 
-    public function getNextActionDate(): ?\DateTimeInterface
+    public function getNextActionDate(): ?DateTimeInterface
     {
         return $this->nextActionDate;
     }
@@ -155,14 +156,14 @@ class ExtensionParty
     /**
      * @return $this
      */
-    public function setNextActionDate(?\DateTimeInterface $nextActionDate): static
+    public function setNextActionDate(?DateTimeInterface $nextActionDate): static
     {
         $this->nextActionDate = $nextActionDate;
 
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): ?DateTimeInterface
     {
         return $this->createdAt;
     }
@@ -170,14 +171,14 @@ class ExtensionParty
     /**
      * @return $this
      */
-    public function setCreatedAt(?\DateTimeInterface $createdAt): static
+    public function setCreatedAt(?DateTimeInterface $createdAt): static
     {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->updatedAt;
     }
@@ -185,7 +186,7 @@ class ExtensionParty
     /**
      * @return $this
      */
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): static
+    public function setUpdatedAt(?DateTimeInterface $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
 

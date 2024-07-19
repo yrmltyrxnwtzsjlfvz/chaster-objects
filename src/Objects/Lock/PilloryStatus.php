@@ -3,6 +3,8 @@
 namespace Fake\ChasterObjects\Objects\Lock;
 
 use Bytes\DateBundle\Objects\ComparableDateInterval;
+use DateInterval;
+use DateTimeInterface;
 use Fake\ChasterObjects\Objects\Traits\ChasterIdTrait;
 use Fake\ChasterObjects\Objects\Traits\CreatedAtTrait;
 use Symfony\Component\Serializer\Annotation\SerializedName;
@@ -24,7 +26,7 @@ class PilloryStatus
     private $totalDurationAdded;
 
     /**
-     * @var \DateTimeInterface|null
+     * @var DateTimeInterface|null
      */
     private $voteEndsAt;
 
@@ -68,7 +70,7 @@ class PilloryStatus
         return $this;
     }
 
-    public function getVoteEndsAt(): ?\DateTimeInterface
+    public function getVoteEndsAt(): ?DateTimeInterface
     {
         return $this->voteEndsAt;
     }
@@ -76,7 +78,7 @@ class PilloryStatus
     /**
      * @return $this
      */
-    public function setVoteEndsAt(?\DateTimeInterface $voteEndsAt): static
+    public function setVoteEndsAt(?DateTimeInterface $voteEndsAt): static
     {
         $this->voteEndsAt = $voteEndsAt;
 
@@ -113,7 +115,7 @@ class PilloryStatus
         return $this;
     }
 
-    public function getTotalDurationAddedAsInterval(): \DateInterval
+    public function getTotalDurationAddedAsInterval(): DateInterval
     {
         return ComparableDateInterval::secondsToInterval($this->totalDurationAdded ?? 0);
     }

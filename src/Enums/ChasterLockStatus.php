@@ -23,6 +23,7 @@ enum ChasterLockStatus: string implements StringBackedEnumInterface
     public function getIcomoonIcon(): string
     {
         trigger_deprecation('fake34526/chaster-objects', '0.3.3', 'The "%s()" method is deprecated', __METHOD__);
+
         return 'icon-'.$this->getIcon();
     }
 

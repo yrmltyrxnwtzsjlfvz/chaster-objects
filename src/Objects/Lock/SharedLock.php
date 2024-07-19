@@ -452,7 +452,8 @@ class SharedLock implements LockSessionInterface
     }
 
     /**
-     * Helper function that sets the correct duration mode dependant on the min/max date fields
+     * Helper function that sets the correct duration mode dependant on the min/max date fields.
+     *
      * @return $this
      */
     public function setupDurationMode(): static

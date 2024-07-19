@@ -28,6 +28,7 @@ final class SharedLinkInfoFactory extends ObjectFactory
         $vote = self::faker()->boolean();
         $minVotes = self::faker()->numberBetween(0, 999);
         $votes = self::faker()->numberBetween(0, 999);
+
         return [
             'vote' => $vote,
             'minVotes' => $minVotes,

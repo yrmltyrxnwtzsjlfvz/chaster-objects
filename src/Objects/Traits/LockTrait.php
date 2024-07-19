@@ -2,6 +2,7 @@
 
 namespace Fake\ChasterObjects\Objects\Traits;
 
+use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -10,9 +11,9 @@ trait LockTrait
     use ProgressTrait;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $maxLimitDate = null;
+    private ?DateTimeInterface $maxLimitDate = null;
 
-    public function setMaxLimitDate(?\DateTimeInterface $maxLimitDate): static
+    public function setMaxLimitDate(?DateTimeInterface $maxLimitDate): static
     {
         $this->maxLimitDate = $maxLimitDate;
 
@@ -24,7 +25,7 @@ trait LockTrait
         return !empty($this->getMaxLimitDate());
     }
 
-    public function getMaxLimitDate(): ?\DateTimeInterface
+    public function getMaxLimitDate(): ?DateTimeInterface
     {
         return $this->maxLimitDate;
     }
