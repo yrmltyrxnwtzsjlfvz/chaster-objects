@@ -104,6 +104,19 @@ trait ProgressTrait
         return LargeComparableDateInterval::getTotalHours($interval, $roundingFunc);
     }
 
+    /**
+     * @throws Exception
+     */
+    public function getNowToEndDays(bool $override = false, string $roundingFunc = 'ceil'): ?int
+    {
+        $interval = $this->getNowToEndInterval($override);
+        if (is_null($interval)) {
+            return null;
+        }
+
+        return LargeComparableDateInterval::getTotalDays($interval, $roundingFunc);
+    }
+
     public function getNowToLesserOfMaxOrEndInterval(?DateTimeInterface $now = null, bool $override = false): ?DateInterval
     {
         $hasStartToMax = $this->hasStartToMaxInterval();
