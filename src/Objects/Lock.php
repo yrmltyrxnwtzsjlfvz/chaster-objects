@@ -868,4 +868,9 @@ class Lock implements LockInterface, FormattedNameInterface
 
         return LargeComparableDateInterval::normalizeToDateInterval(round(LargeComparableDateInterval::normalizeToSeconds($remaining) * $percentage));
     }
+
+    public function isUnlockedForHygiene(): bool
+    {
+        return $this->hasReasonPreventingUnlocking(ReasonPreventingUnlock::TEMPORARY_OPENING);
+    }
 }
