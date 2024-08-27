@@ -4,8 +4,10 @@ namespace Fake\ChasterObjects\Enums;
 
 use Bytes\EnumSerializerBundle\Enums\StringBackedEnumInterface;
 use Bytes\EnumSerializerBundle\Enums\StringBackedEnumTrait;
-use UnitEnum;
+
 use function Symfony\Component\String\u;
+
+use UnitEnum;
 
 enum ActionLogType: string implements StringBackedEnumInterface
 {

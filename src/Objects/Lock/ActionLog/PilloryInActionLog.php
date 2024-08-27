@@ -2,6 +2,24 @@
 
 namespace Fake\ChasterObjects\Objects\Lock\ActionLog;
 
-class PilloryInActionLog extends ActionLog
+use Fake\ChasterObjects\Objects\Lock\ActionLog\Payload\PilloryInPayload;
+
+class PilloryInActionLog extends AbstractActionLog
 {
+    private ?PilloryInPayload $payload;
+
+    public function getPayload(): ?PilloryInPayload
+    {
+        return $this->payload;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setPayload(?PilloryInPayload $payload): static
+    {
+        $this->payload = $payload;
+
+        return $this;
+    }
 }

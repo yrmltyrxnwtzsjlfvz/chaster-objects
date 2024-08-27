@@ -2,22 +2,9 @@
 
 namespace Fake\ChasterObjects\Objects\Lock\ActionLog\Payload;
 
+use Fake\ChasterObjects\Objects\Traits\DurationTrait;
+
 class DurationPayload
 {
-    private ?int $duration = null;
-
-    public function getDuration(): ?int
-    {
-        return $this->duration;
-    }
-
-    /**
-     * @return $this
-     */
-    public function setDuration(?int $duration): static
-    {
-        $this->duration = $duration;
-
-        return $this;
-    }
+    use DurationTrait;
 }

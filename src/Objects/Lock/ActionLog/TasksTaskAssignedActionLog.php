@@ -2,6 +2,24 @@
 
 namespace Fake\ChasterObjects\Objects\Lock\ActionLog;
 
-class TasksTaskAssignedActionLog extends ActionLog
+use Fake\ChasterObjects\Objects\Lock\ActionLog\Payload\TaskPayload;
+
+class TasksTaskAssignedActionLog extends AbstractActionLog
 {
+    private ?TaskPayload $payload;
+
+    public function getPayload(): ?TaskPayload
+    {
+        return $this->payload;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setPayload(?TaskPayload $payload): static
+    {
+        $this->payload = $payload;
+
+        return $this;
+    }
 }

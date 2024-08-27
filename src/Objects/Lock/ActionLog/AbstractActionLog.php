@@ -49,7 +49,7 @@ use function Symfony\Component\String\u;
     'wheel_of_fortune_turned' => WheelOfFortuneTurnedActionLog::class,
     'custom' => CustomActionLog::class,
 ])]
-abstract class AbstractActionLog
+abstract class AbstractActionLog implements ActionLogInterface
 {
     /**
      * @var string|null
