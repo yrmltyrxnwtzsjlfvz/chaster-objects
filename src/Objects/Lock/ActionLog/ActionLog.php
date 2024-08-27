@@ -2,7 +2,7 @@
 
 namespace Fake\ChasterObjects\Objects\Lock\ActionLog;
 
-class ActionLog
+class ActionLog extends AbstractActionLog
 {
     private $payload;
 
