@@ -10,6 +10,7 @@ enum HomeAction: string implements StringBackedEnumInterface
     use StringBackedEnumTrait;
 
     case PENALTY_TASKS_TO_COMPLETE = 'penalty_tasks_to_complete';
+    case PILLORY_IN_PILLORY = 'pillory_in_pillory';
     case TASKS_DO_TASK = 'tasks_do_task';
     case VERIFICATION_PICTURE_SUBMIT = 'verification_picture_submit';
 

@@ -1,8 +1,9 @@
 <?php
 
-namespace Fake\ChasterObjects\Objects\Extension\Partner;
+namespace Fake\ChasterObjects\Tests\Objects\Extension\Partner;
 
 use Fake\ChasterObjects\Enums\HomeAction as HomeActionEnum;
+use Fake\ChasterObjects\Objects\Extension\Partner\HomeAction;
 use Faker\Factory;
 use Generator;
 use PHPUnit\Framework\TestCase;

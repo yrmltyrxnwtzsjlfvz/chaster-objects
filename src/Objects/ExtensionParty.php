@@ -58,6 +58,8 @@ class ExtensionParty
 
     private $config;
 
+    private $userData = null;
+
     public function getExtensionPartyId(): ?string
     {
         return $this->extensionPartyId;
@@ -205,6 +207,17 @@ class ExtensionParty
     {
         $this->config = $config;
 
+        return $this;
+    }
+
+    public function getUserData()
+    {
+        return $this->userData;
+    }
+
+    public function setUserData($userData): static
+    {
+        $this->userData = $userData;
         return $this;
     }
 }
