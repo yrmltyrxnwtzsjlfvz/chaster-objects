@@ -3,9 +3,14 @@
 namespace Fake\ChasterObjects\Objects;
 
 use DateTimeInterface;
+use Fake\ChasterObjects\Objects\Extension\Task\ExtensionTasks;
 use Fake\ChasterObjects\Objects\Traits\ExtensionTrait;
+use Symfony\Component\Serializer\Annotation\DiscriminatorMap;
 use Symfony\Component\Serializer\Annotation\SerializedName;
 
+#[DiscriminatorMap(typeProperty: 'slug', mapping: [
+    'tasks' => ExtensionTasks::class,
+])]
 class ExtensionParty
 {
     use ExtensionTrait;
