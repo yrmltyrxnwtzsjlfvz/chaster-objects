@@ -7,14 +7,8 @@ use Fake\ChasterObjects\Objects\ExtensionParty;
 
 class ExtensionTemporaryOpening extends ExtensionParty
 {
-    /**
-     * @var Config|null
-     */
     private ?Config $config = null;
 
-    /**
-     * @var UserData|null
-     */
     private ?UserData $userData = null;
 
     public function getUserData(): ?UserData
@@ -24,6 +18,7 @@ class ExtensionTemporaryOpening extends ExtensionParty
 
     /**
      * @param UserData|null $userData
+     *
      * @return $this
      */
     public function setUserData($userData): static
