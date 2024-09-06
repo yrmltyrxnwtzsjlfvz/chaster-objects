@@ -3,9 +3,10 @@
 namespace Fake\ChasterObjects\Tests\Objects\Lock;
 
 use DateInterval;
-use Fake\ChasterFactory\Factory\LockFactory;
+use Fake\ChasterFactory\Factory\ExtensionHomeActionWithPartyIdFactory;
+use Fake\ChasterFactory\Factory\ExtensionPartyFactory;
+use Fake\ChasterObjects\Enums\HomeAction;
 use Fake\ChasterObjects\Objects\Lock;
-use Fake\ChasterObjects\Tests\Story\KeyholderWearerStory;
 use Generator;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Clock\Clock;
@@ -169,11 +170,55 @@ class LockTest extends TestCase
         $this->assertNull($lock->getStartToNowDays());
     }
 
-    public function testShit()
+    public function testHasAvailableHomeAction()
     {
-        KeyholderWearerStory::load();
-        $object = LockFactory::createOne(['user' => KeyholderWearerStory::getRandom('wearer'), 'keyholder' => KeyholderWearerStory::getRandom('keyholder')]);
-        dump($object);
-        self::assertSame('', $object->getStatus());
+        $lock = new Lock();
+
+        $lock->setAvailableHomeActions([]);
+
+        self::assertFalse($lock->hasAvailableHomeAction(HomeAction::START));
+        self::assertFalse($lock->hasAvailableHomeAction('start'));
+
+        self::assertFalse($lock->hasAvailableHomeAction('end end end'));
+
+        $lock->setAvailableHomeActions([
+            ExtensionHomeActionWithPartyIdFactory::createOne(),
+            ExtensionHomeActionWithPartyIdFactory::createOne(['slug' => HomeAction::START]),
+            ExtensionHomeActionWithPartyIdFactory::createOne(),
+        ]);
+
+        self::assertTrue($lock->hasAvailableHomeAction(HomeAction::START));
+        self::assertTrue($lock->hasAvailableHomeAction('start'));
+
+        self::assertFalse($lock->hasAvailableHomeAction('end end end'));
+    }
+
+    public function testIsTaskAssigned()
+    {
+        $lock = new Lock();
+
+        self::assertFalse($lock->isTaskAssigned());
+
+        $lock->setExtensions(ExtensionPartyFactory::createMany(1));
+
+        self::assertFalse($lock->isTaskAssigned());
+
+        $lock->setExtensions(ExtensionPartyFactory::createMany(1, attributes: ['slug' => 'tasks']));
+
+        $lock->setAvailableHomeActions([
+            ExtensionHomeActionWithPartyIdFactory::createOne(),
+            ExtensionHomeActionWithPartyIdFactory::createOne(['slug' => HomeAction::START]),
+            ExtensionHomeActionWithPartyIdFactory::createOne(),
+        ]);
+
+        self::assertFalse($lock->isTaskAssigned());
+
+        $lock->setAvailableHomeActions([
+            ExtensionHomeActionWithPartyIdFactory::createOne(),
+            ExtensionHomeActionWithPartyIdFactory::createOne(['slug' => HomeAction::TASKS_DO_TASK]),
+            ExtensionHomeActionWithPartyIdFactory::createOne(),
+        ]);
+
+        self::assertTrue($lock->isTaskAssigned());
     }
 }
