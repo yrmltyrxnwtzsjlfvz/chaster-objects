@@ -6,9 +6,6 @@ use Fake\ChasterObjects\Objects\Extension\Penalty\Punishment;
 
 class PeerVerification
 {
-    /**
-     * @var bool|null
-     */
     private ?bool $enabled = null;
 
     /**

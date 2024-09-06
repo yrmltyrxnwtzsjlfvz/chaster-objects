@@ -4,15 +4,11 @@ namespace Fake\ChasterObjects\Objects\Extension\VerificationPicture;
 
 use Fake\ChasterObjects\Enums\VerificationPictureVisibility;
 use Fake\ChasterObjects\Objects\Extension\ExtensionConfigInterface;
-use Symfony\Component\Validator\Constraints as Assert;
 
 class Config implements ExtensionConfigInterface
 {
     private ?VerificationPictureVisibility $visibility = null;
 
-    /**
-     * @var PeerVerification|null
-     */
     private ?PeerVerification $peerVerification = null;
 
     public function getVisibility(): ?VerificationPictureVisibility

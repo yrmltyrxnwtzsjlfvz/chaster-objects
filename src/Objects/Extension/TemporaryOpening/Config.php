@@ -7,19 +7,10 @@ use Symfony\Component\Serializer\Attribute\SerializedName;
 
 class Config implements ExtensionConfigInterface
 {
-    /**
-     * @var int|null
-     */
     private ?int $openingTime = null;
 
-    /**
-     * @var int|null
-     */
     private ?int $penaltyTime = null;
 
-    /**
-     * @var bool|null
-     */
     #[SerializedName('allowOnlyKeyholderToOpen')]
     private ?bool $keyholderOpenOnly = null;
 

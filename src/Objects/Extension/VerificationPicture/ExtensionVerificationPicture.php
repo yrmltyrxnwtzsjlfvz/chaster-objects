@@ -2,8 +2,6 @@
 
 namespace Fake\ChasterObjects\Objects\Extension\VerificationPicture;
 
-use Fake\ChasterObjects\Objects\Extension\VerificationPicture\Config;
-use Fake\ChasterObjects\Objects\Extension\VerificationPicture\UserData;
 use Bytes\DateBundle\Helpers\DateTimeHelper;
 use DateInterval;
 use DateTimeImmutable;
@@ -11,14 +9,8 @@ use Fake\ChasterObjects\Objects\ExtensionParty;
 
 class ExtensionVerificationPicture extends ExtensionParty
 {
-    /**
-     * @var Config|null
-     */
     private ?Config $config = null;
 
-    /**
-     * @var UserData|null
-     */
     private ?UserData $userData;
 
     public function getUserData(): ?UserData
@@ -28,6 +20,7 @@ class ExtensionVerificationPicture extends ExtensionParty
 
     /**
      * @param UserData|null $userData
+     *
      * @return $this
      */
     public function setUserData($userData): static
