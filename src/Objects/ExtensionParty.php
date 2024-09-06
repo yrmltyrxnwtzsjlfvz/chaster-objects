@@ -58,7 +58,7 @@ class ExtensionParty
 
     private $config;
 
-    private $userData = null;
+    private $userData;
 
     public function getExtensionPartyId(): ?string
     {
@@ -218,6 +218,7 @@ class ExtensionParty
     public function setUserData($userData): static
     {
         $this->userData = $userData;
+
         return $this;
     }
 }
