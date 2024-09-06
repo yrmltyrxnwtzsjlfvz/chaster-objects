@@ -134,4 +134,9 @@ class UserData
     {
         return $this->getStatus()?->equals(TaskStatus::VOTE) || !empty($this->getTaskVoteEndsAt());
     }
+
+    public function hasTaskAssigned(): bool
+    {
+        return $this->getStatus()?->equals(TaskStatus::ASSIGNED) ?? false;
+    }
 }
