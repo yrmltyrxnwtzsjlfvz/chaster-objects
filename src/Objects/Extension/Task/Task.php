@@ -4,7 +4,7 @@ namespace Fake\ChasterObjects\Objects\Extension\Task;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class Task implements TaskInterface
+class Task
 {
     #[Assert\NotNull]
     #[Assert\Length(
