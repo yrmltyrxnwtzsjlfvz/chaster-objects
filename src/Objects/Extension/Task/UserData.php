@@ -20,7 +20,7 @@ class UserData
     private ?Task $currentTask = null;
 
     private ?string $currentTaskVote = null;
-    
+
     private ?TaskStatus $status = null;
 
     private ?int $points = null;

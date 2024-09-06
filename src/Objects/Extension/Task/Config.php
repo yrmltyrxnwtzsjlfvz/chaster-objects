@@ -8,9 +8,9 @@ use Fake\ChasterObjects\Objects\Extension\Penalty\Punishment;
 class Config implements ExtensionConfigInterface
 {
     /**
-     * @var TaskInterface[]|null
+     * @var Task[]|null
      */
-    private $tasks;
+    private ?array $tasks = null;
 
     /**
      * @var bool|null
@@ -63,7 +63,7 @@ class Config implements ExtensionConfigInterface
     private $actionsOnAbandonedTask;
 
     /**
-     * @return TaskInterface[]|null
+     * @return Task[]|null
      */
     public function getTasks(): ?array
     {
@@ -71,7 +71,7 @@ class Config implements ExtensionConfigInterface
     }
 
     /**
-     * @param TaskInterface[]|null $tasks
+     * @param Task[]|null $tasks
      *
      * @return $this
      */
