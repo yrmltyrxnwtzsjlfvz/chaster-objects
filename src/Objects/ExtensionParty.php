@@ -4,12 +4,14 @@ namespace Fake\ChasterObjects\Objects;
 
 use DateTimeInterface;
 use Fake\ChasterObjects\Objects\Extension\Task\ExtensionTasks;
+use Fake\ChasterObjects\Objects\Extension\VerificationPicture\ExtensionVerificationPicture;
 use Fake\ChasterObjects\Objects\Traits\ExtensionTrait;
 use Symfony\Component\Serializer\Annotation\DiscriminatorMap;
 use Symfony\Component\Serializer\Annotation\SerializedName;
 
 #[DiscriminatorMap(typeProperty: 'slug', mapping: [
     'tasks' => ExtensionTasks::class,
+    'verification-picture' => ExtensionVerificationPicture::class,
     '2048' => ExtensionParty::class,
     'ad' => ExtensionParty::class,
     'add' => ExtensionParty::class,
@@ -273,7 +275,6 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
     'unlock' => ExtensionParty::class,
     'unlock-condition' => ExtensionParty::class,
     'unlock-condition-dev' => ExtensionParty::class,
-    'verification-picture' => ExtensionParty::class,
     'vincebot' => ExtensionParty::class,
     'voting' => ExtensionParty::class,
     'voting-games' => ExtensionParty::class,
