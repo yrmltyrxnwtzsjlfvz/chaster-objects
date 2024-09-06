@@ -2,6 +2,8 @@
 
 namespace Fake\ChasterObjects\Objects;
 
+use Fake\ChasterObjects\Enums\HomeAction;
+
 class ExtensionHomeActionWithPartyId
 {
     /**
@@ -57,9 +59,9 @@ class ExtensionHomeActionWithPartyId
     /**
      * @return $this
      */
-    public function setSlug(?string $slug): static
+    public function setSlug(HomeAction|string|null $slug): static
     {
-        $this->slug = $slug;
+        $this->slug = HomeAction::tryNormalizeToValue($slug) ?? $slug;
 
         return $this;
     }

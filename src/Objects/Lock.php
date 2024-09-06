@@ -12,6 +12,7 @@ use DateTimeInterface;
 use DateTimeZone;
 use Fake\ChasterObjects\Enums\ChasterExtension;
 use Fake\ChasterObjects\Enums\ChasterLockStatus;
+use Fake\ChasterObjects\Enums\HomeAction;
 use Fake\ChasterObjects\Enums\KeyholderUnavailable;
 use Fake\ChasterObjects\Enums\LockRole;
 use Fake\ChasterObjects\Enums\ReasonPreventingUnlock;
@@ -406,6 +407,18 @@ class Lock implements LockInterface, FormattedNameInterface
         $this->availableHomeActions = $availableHomeActions;
 
         return $this;
+    }
+
+    public function hasAvailableHomeAction(HomeAction|string $slug): bool
+    {
+        $slug = HomeAction::tryNormalizeToValue($slug) ?? $slug;
+        if (empty($this->getAvailableHomeActions())) {
+            return false;
+        }
+
+        return !empty(Arr::first($this->getAvailableHomeActions(), function (ExtensionHomeActionWithPartyId $r) use ($slug) {
+            return $r->getSlug() === $slug;
+        }));
     }
 
     public function hasReasonPreventingUnlocking(ReasonPreventingUnlock $reason): bool
@@ -872,5 +885,14 @@ class Lock implements LockInterface, FormattedNameInterface
     public function isUnlockedForHygiene(): bool
     {
         return $this->hasReasonPreventingUnlocking(ReasonPreventingUnlock::TEMPORARY_OPENING);
+    }
+
+    public function isTaskAssigned(): bool
+    {
+        if (!$this->hasTasks()) {
+            return false;
+        }
+
+        return $this->hasAvailableHomeAction(HomeAction::TASKS_DO_TASK);
     }
 }
