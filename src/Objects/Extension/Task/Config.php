@@ -12,55 +12,28 @@ class Config implements ExtensionConfigInterface
      */
     private ?array $tasks = null;
 
-    /**
-     * @var bool|null
-     */
-    private $voteEnabled;
+    private ?bool $voteEnabled = null;
 
-    /**
-     * @var int|null
-     */
-    private $voteDuration;
+    private ?int $voteDuration = null;
 
-    /**
-     * @var bool|null
-     */
-    private $startVoteAfterLastVote;
+    private ?bool $startVoteAfterLastVote = null;
 
-    /**
-     * @var bool|null
-     */
-    private $enablePoints;
+    private ?bool $enablePoints = null;
 
-    /**
-     * @var int|null
-     */
-    private $pointsRequired;
+    private ?int $pointsRequired = null;
 
-    /**
-     * @var bool|null
-     */
-    private $allowWearerToEditTasks;
+    private ?bool $allowWearerToEditTasks = null;
 
-    /**
-     * @var bool|null
-     */
-    private $allowWearerToConfigureTasks;
+    private ?bool $allowWearerToConfigureTasks = null;
 
-    /**
-     * @var bool|null
-     */
-    private $preventWearerFromAssigningTasks;
+    private ?bool $preventWearerFromAssigningTasks = null;
 
-    /**
-     * @var bool|null
-     */
-    private $allowWearerToChooseTasks;
+    private ?bool $allowWearerToChooseTasks = null;
 
     /**
      * @var Punishment[]|null
      */
-    private $actionsOnAbandonedTask;
+    private ?array $actionsOnAbandonedTask = null;
 
     /**
      * @return Task[]|null

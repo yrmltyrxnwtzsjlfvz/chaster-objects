@@ -7,11 +7,8 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
 
 class Task extends ParentTask
 {
-    /**
-     * @var int|null
-     */
     #[SerializedName('nbVotes')]
-    private $numberVotes;
+    private ?int $numberVotes = null;
 
     public function getNumberVotes(): ?int
     {

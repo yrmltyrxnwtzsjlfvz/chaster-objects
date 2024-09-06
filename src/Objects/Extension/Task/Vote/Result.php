@@ -6,15 +6,12 @@ class Result
 {
     use VoteEndsAtTrait;
 
-    /**
-     * @var bool|null
-     */
-    private $canVote;
+    private ?bool $canVote = null;
 
     /**
      * @var Task[]|null
      */
-    private $choices;
+    private ?array $choices = null;
 
     /**
      * @var mixed|null
@@ -59,7 +56,7 @@ class Result
     /**
      * @return mixed|null
      */
-    public function getSelectedChoiceIndex(): mixed
+    public function getSelectedChoiceIndex()
     {
         return $this->selectedChoiceIndex;
     }
@@ -67,7 +64,7 @@ class Result
     /**
      * @return $this
      */
-    public function setSelectedChoiceIndex(mixed $selectedChoiceIndex): static
+    public function setSelectedChoiceIndex($selectedChoiceIndex): static
     {
         $this->selectedChoiceIndex = $selectedChoiceIndex;
 
