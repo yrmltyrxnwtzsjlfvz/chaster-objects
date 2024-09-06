@@ -183,7 +183,7 @@ class LockTest extends TestCase
 
         $lock->setAvailableHomeActions([
             ExtensionHomeActionWithPartyIdFactory::createOne(),
-            ExtensionHomeActionWithPartyIdFactory::createOne(['slug' => HomeAction::START]),
+            ExtensionHomeActionWithPartyIdFactory::createOne(['slug' => HomeAction::START->value]),
             ExtensionHomeActionWithPartyIdFactory::createOne(),
         ]);
 
@@ -207,7 +207,7 @@ class LockTest extends TestCase
 
         $lock->setAvailableHomeActions([
             ExtensionHomeActionWithPartyIdFactory::createOne(),
-            ExtensionHomeActionWithPartyIdFactory::createOne(['slug' => HomeAction::START]),
+            ExtensionHomeActionWithPartyIdFactory::createOne(['slug' => HomeAction::START->value]),
             ExtensionHomeActionWithPartyIdFactory::createOne(),
         ]);
 
@@ -215,7 +215,7 @@ class LockTest extends TestCase
 
         $lock->setAvailableHomeActions([
             ExtensionHomeActionWithPartyIdFactory::createOne(),
-            ExtensionHomeActionWithPartyIdFactory::createOne(['slug' => HomeAction::TASKS_DO_TASK]),
+            ExtensionHomeActionWithPartyIdFactory::createOne(['slug' => HomeAction::TASKS_DO_TASK->value]),
             ExtensionHomeActionWithPartyIdFactory::createOne(),
         ]);
 
