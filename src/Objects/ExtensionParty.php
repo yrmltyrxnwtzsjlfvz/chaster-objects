@@ -4,6 +4,7 @@ namespace Fake\ChasterObjects\Objects;
 
 use DateTimeInterface;
 use Fake\ChasterObjects\Objects\Extension\Task\ExtensionTasks;
+use Fake\ChasterObjects\Objects\Extension\TemporaryOpening\ExtensionTemporaryOpening;
 use Fake\ChasterObjects\Objects\Extension\VerificationPicture\ExtensionVerificationPicture;
 use Fake\ChasterObjects\Objects\Traits\ExtensionTrait;
 use Symfony\Component\Serializer\Annotation\DiscriminatorMap;
@@ -11,6 +12,7 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
 
 #[DiscriminatorMap(typeProperty: 'slug', mapping: [
     'tasks' => ExtensionTasks::class,
+    'temporary-opening' => ExtensionTemporaryOpening::class,
     'verification-picture' => ExtensionVerificationPicture::class,
     '2048' => ExtensionParty::class,
     'ad' => ExtensionParty::class,
@@ -188,7 +190,6 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
     'tasks-for-productivity' => ExtensionParty::class,
     'tattletale' => ExtensionParty::class,
     'tattletale-dev' => ExtensionParty::class,
-    'temporary-opening' => ExtensionParty::class,
     'tesex' => ExtensionParty::class,
     'test' => ExtensionParty::class,
     'test1' => ExtensionParty::class,

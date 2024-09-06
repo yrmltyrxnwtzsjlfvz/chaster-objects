@@ -19,7 +19,7 @@ class ExtensionTasks extends ExtensionParty
     private $userData;
 
     /**
-     * @return array{pointsRequired: int|null, pointsEarned: int|null, pointsNeeded: int|null, assigned: \Fake\ChasterObjects\Objects\Extension\Task\Task|null, voteEndsAt: DateTimeInterface|null}
+     * @return array{pointsRequired: int|null, pointsEarned: int|null, pointsNeeded: int|null, assigned: Task|null, voteEndsAt: DateTimeInterface|null}
      */
     public function getTaskDetails(): array
     {
