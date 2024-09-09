@@ -27,7 +27,7 @@ class ExtensionTasks extends ExtensionParty
             'pointsRequired' => $this->getTaskPointsRequired(),
             'pointsEarned' => $this->getTaskPointsEarned(),
             'pointsNeeded' => $this->getTaskPointsNeeded(),
-            'assigned' => $this->getTaskAssigned(),
+            'assigned' => $this->getCurrentTask(),
             'voteEndsAt' => $this->getTaskVoteEndsAt(),
         ];
     }
@@ -68,11 +68,6 @@ class ExtensionTasks extends ExtensionParty
     public function getTaskPointsNeeded(): ?int
     {
         return $this->getTaskPointsRequired() - $this->getTaskPointsEarned();
-    }
-
-    public function getTaskAssigned(): ?Task
-    {
-        return $this->getUserData()?->getCurrentTask();
     }
 
     public function getCurrentTask(): ?Task
