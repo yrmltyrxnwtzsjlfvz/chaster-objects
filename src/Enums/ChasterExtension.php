@@ -24,6 +24,7 @@ enum ChasterExtension: string implements StringBackedEnumInterface
     case BETTER_RANDOM_EVENTS = 'better-random-events';
     case DICE = 'dice';
     case FIND_THE_KEY_1 = 'find-the-key-1';
+    case GAMES = 'games';
     case GUESS_TIMER = 'guess-timer';
     case JIGSAW_PUZZLE = 'jigsaw-puzzle';
     case LINK = 'link';
