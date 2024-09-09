@@ -18,6 +18,7 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
     'better-random-events' => Extension\Partner\BetterRandomEvents\Extension::class,
     'dice' => Extension\Dice\Extension::class,
     'find-the-key-1' => Extension\Partner\FindTheKey1\Extension::class,
+    'games' => Extension\Partner\Games\Extension::class,
     'guess-timer' => Extension\GuessTimer\Extension::class,
     'jigsaw-puzzle' => Extension\Partner\JigsawPuzzle\Extension::class,
     'link' => Extension\Link\Extension::class,
