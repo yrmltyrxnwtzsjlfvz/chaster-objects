@@ -4,6 +4,8 @@ namespace Fake\ChasterObjects\Objects\Extension\Task;
 
 use Fake\ChasterObjects\Objects\Extension\ExtensionConfigInterface;
 use Fake\ChasterObjects\Objects\Extension\Penalty\Punishment;
+use JetBrains\PhpStorm\Deprecated;
+use Symfony\Component\Serializer\Attribute\SerializedName;
 
 class Config implements ExtensionConfigInterface
 {
@@ -18,7 +20,8 @@ class Config implements ExtensionConfigInterface
 
     private ?bool $startVoteAfterLastVote = null;
 
-    private ?bool $enablePoints = null;
+    #[SerializedName('enablePoints')]
+    private ?bool $points = null;
 
     private ?int $pointsRequired = null;
 
@@ -106,19 +109,34 @@ class Config implements ExtensionConfigInterface
         return $this;
     }
 
-    public function getEnablePoints(): ?bool
+    public function hasPoints(): ?bool
     {
-        return $this->enablePoints;
+        return $this->points;
     }
 
     /**
      * @return $this
      */
-    public function setEnablePoints(?bool $enablePoints): static
+    public function setPoints(?bool $points): static
     {
-        $this->enablePoints = $enablePoints;
+        $this->points = $points;
 
         return $this;
+    }
+
+    #[Deprecated('Since 0.4.9, use hasPoints() instead', '%class%->hasPoints()')]
+    public function getEnablePoints(): ?bool
+    {
+        return $this->hasPoints();
+    }
+
+    /**
+     * @return $this
+     */
+    #[Deprecated('Since 0.4.9, use setPoints() instead', '%class%->setPoints(%parameter0%)')]
+    public function setEnablePoints(?bool $enablePoints): static
+    {
+        return $this->setPoints($enablePoints);
     }
 
     public function getPointsRequired(): ?int
