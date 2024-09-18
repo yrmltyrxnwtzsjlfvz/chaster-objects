@@ -4,9 +4,9 @@ namespace Fake\ChasterObjects\Objects\Extension\Task;
 
 use Fake\ChasterObjects\Objects\Extension\ExtensionConfigInterface;
 use Fake\ChasterObjects\Objects\Extension\Penalty\Punishment;
-use Symfony\Component\Validator\Constraints as Assert;
 use JetBrains\PhpStorm\Deprecated;
 use Symfony\Component\Serializer\Attribute\SerializedName;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class Config implements ExtensionConfigInterface
@@ -25,16 +25,20 @@ class Config implements ExtensionConfigInterface
     #[SerializedName('enablePoints')]
     private ?bool $points = null;
 
-    #[Assert\Positive]
+    #[Assert\PositiveOrZero]
     private ?int $pointsRequired = null;
 
-    private ?bool $allowWearerToEditTasks = null;
+    #[SerializedName('allowWearerToEditTasks')]
+    private ?bool $wearerAllowedToEditTasks = null;
 
-    private ?bool $allowWearerToConfigureTasks = null;
+    #[SerializedName('allowWearerToEditTasks')]
+    private ?bool $wearerAllowedToConfigureTasks = null;
 
-    private ?bool $preventWearerFromAssigningTasks = null;
+    #[SerializedName('preventWearerFromAssigningTasks')]
+    private ?bool $wearerPreventedFromAssigningTasks = null;
 
-    private ?bool $allowWearerToChooseTasks = null;
+    #[SerializedName('allowWearerToChooseTasks')]
+    private ?bool $wearerAllowedToChooseTasks = null;
 
     /**
      * @var Punishment[]|null
@@ -157,39 +161,75 @@ class Config implements ExtensionConfigInterface
         return $this;
     }
 
+    #[Deprecated('Since 0.4.11, use isWearerAllowedToEditTasks() instead', '%class%->isWearerAllowedToEditTasks()')]
     public function getAllowWearerToEditTasks(): ?bool
     {
-        return $this->allowWearerToEditTasks;
+        return $this->isWearerAllowedToEditTasks();
     }
 
-    /**
-     * @return $this
-     */
+    #[Deprecated('Since 0.4.11, use setWearerAllowedToEditTasks() instead', '%class%->setWearerAllowedToEditTasks(%parameter0%)')]
     public function setAllowWearerToEditTasks(?bool $allowWearerToEditTasks): static
     {
-        $this->allowWearerToEditTasks = $allowWearerToEditTasks;
+        return $this->setWearerAllowedToEditTasks($allowWearerToEditTasks);
+    }
+
+    public function isWearerAllowedToEditTasks(): ?bool
+    {
+        return $this->wearerAllowedToEditTasks;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setWearerAllowedToEditTasks(?bool $wearerAllowedToEditTasks): static
+    {
+        $this->wearerAllowedToEditTasks = $wearerAllowedToEditTasks;
 
         return $this;
     }
 
+    #[Deprecated('Since 0.4.11, use isWearerAllowedToConfigureTasks() instead', '%class%->isWearerAllowedToConfigureTasks()')]
     public function getAllowWearerToConfigureTasks(): ?bool
     {
-        return $this->allowWearerToConfigureTasks;
+        return $this->isWearerAllowedToConfigureTasks();
     }
 
-    /**
-     * @return $this
-     */
+    #[Deprecated('Since 0.4.11, use setWearerAllowedToConfigureTasks() instead', '%class%->setWearerAllowedToConfigureTasks(%parameter0%)')]
     public function setAllowWearerToConfigureTasks(?bool $allowWearerToConfigureTasks): static
     {
-        $this->allowWearerToConfigureTasks = $allowWearerToConfigureTasks;
+        return $this->setWearerAllowedToConfigureTasks($allowWearerToConfigureTasks);
+    }
+
+    public function isWearerAllowedToConfigureTasks(): ?bool
+    {
+        return $this->wearerAllowedToConfigureTasks;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setWearerAllowedToConfigureTasks(?bool $wearerAllowedToConfigureTasks): static
+    {
+        $this->wearerAllowedToConfigureTasks = $wearerAllowedToConfigureTasks;
 
         return $this;
     }
 
+    #[Deprecated('Since 0.4.11, use isWearerPreventedFromAssigningTasks() instead', '%class%->isWearerPreventedFromAssigningTasks()')]
     public function getPreventWearerFromAssigningTasks(): ?bool
     {
-        return $this->preventWearerFromAssigningTasks;
+        return $this->isWearerPreventedFromAssigningTasks();
+    }
+
+    #[Deprecated('Since 0.4.11, use setWearerPreventedFromAssigningTasks() instead', '%class%->setWearerPreventedFromAssigningTasks(%parameter0%)')]
+    public function setPreventWearerFromAssigningTasks(?bool $preventWearerFromAssigningTasks): static
+    {
+        return $this->setWearerPreventedFromAssigningTasks($preventWearerFromAssigningTasks);
+    }
+
+    public function isWearerPreventedFromAssigningTasks(): ?bool
+    {
+        return $this->wearerPreventedFromAssigningTasks;
     }
 
     /**
@@ -197,16 +237,28 @@ class Config implements ExtensionConfigInterface
      *
      * @return $this
      */
-    public function setPreventWearerFromAssigningTasks(?bool $preventWearerFromAssigningTasks): static
+    public function setWearerPreventedFromAssigningTasks(?bool $wearerPreventedFromAssigningTasks): static
     {
-        $this->preventWearerFromAssigningTasks = $preventWearerFromAssigningTasks;
+        $this->wearerPreventedFromAssigningTasks = $wearerPreventedFromAssigningTasks;
 
         return $this;
     }
 
+    #[Deprecated('Since 0.4.11, use isWearerAllowedToChooseTasks() instead', '%class%->isWearerAllowedToChooseTasks()')]
     public function getAllowWearerToChooseTasks(): ?bool
     {
-        return $this->allowWearerToChooseTasks;
+        return $this->isWearerAllowedToChooseTasks();
+    }
+
+    #[Deprecated('Since 0.4.11, use setWearerAllowedToChooseTasks() instead', '%class%->setWearerAllowedToChooseTasks(%parameter0%)')]
+    public function setAllowWearerToChooseTasks(?bool $allowWearerToChooseTasks): static
+    {
+        return $this->setWearerAllowedToChooseTasks($allowWearerToChooseTasks);
+    }
+
+    public function isWearerAllowedToChooseTasks(): ?bool
+    {
+        return $this->wearerAllowedToChooseTasks;
     }
 
     /**
@@ -214,9 +266,9 @@ class Config implements ExtensionConfigInterface
      *
      * @return $this
      */
-    public function setAllowWearerToChooseTasks(?bool $allowWearerToChooseTasks): static
+    public function setWearerAllowedToChooseTasks(?bool $wearerAllowedToChooseTasks): static
     {
-        $this->allowWearerToChooseTasks = $allowWearerToChooseTasks;
+        $this->wearerAllowedToChooseTasks = $wearerAllowedToChooseTasks;
 
         return $this;
     }
@@ -239,8 +291,8 @@ class Config implements ExtensionConfigInterface
             $assignRandom = true;
         }
 
-        return $this->setPreventWearerFromAssigningTasks(!$assignRandom)
-            ->setAllowWearerToChooseTasks($assignSpecific);
+        return $this->setWearerPreventedFromAssigningTasks(!$assignRandom)
+            ->setWearerAllowedToChooseTasks($assignSpecific);
     }
 
     /**
@@ -266,9 +318,23 @@ class Config implements ExtensionConfigInterface
     #[Assert\Callback]
     public function validateAllowWearerToChooseTasks(ExecutionContextInterface $context, mixed $payload): void
     {
-        if ($this->getPreventWearerFromAssigningTasks() && $this->getAllowWearerToChooseTasks()) {
+        if ($this->isWearerPreventedFromAssigningTasks() && $this->isWearerAllowedToChooseTasks()) {
             $context->buildViolation('The wearer cannot choose their task if they cannot assign their own tasks.')
                 ->atPath('allowWearerToChooseTasks')
+                ->addViolation();
+        }
+    }
+
+    #[Assert\Callback]
+    public function validatePointsRequired(ExecutionContextInterface $context, mixed $payload): void
+    {
+        if ($this->hasPoints() && empty($this->getPointsRequired())) {
+            $context->buildViolation('Points required must be 1 or higher if points are enabled.')
+                ->atPath('pointsRequired')
+                ->addViolation();
+        } elseif (!$this->hasPoints() && !empty($this->getPointsRequired())) {
+            $context->buildViolation('Points required must be 0 if points are disabled.')
+                ->atPath('pointsRequired')
                 ->addViolation();
         }
     }
