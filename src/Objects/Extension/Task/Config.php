@@ -4,8 +4,10 @@ namespace Fake\ChasterObjects\Objects\Extension\Task;
 
 use Fake\ChasterObjects\Objects\Extension\ExtensionConfigInterface;
 use Fake\ChasterObjects\Objects\Extension\Penalty\Punishment;
+use Symfony\Component\Validator\Constraints as Assert;
 use JetBrains\PhpStorm\Deprecated;
 use Symfony\Component\Serializer\Attribute\SerializedName;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class Config implements ExtensionConfigInterface
 {
@@ -23,6 +25,7 @@ class Config implements ExtensionConfigInterface
     #[SerializedName('enablePoints')]
     private ?bool $points = null;
 
+    #[Assert\Positive]
     private ?int $pointsRequired = null;
 
     private ?bool $allowWearerToEditTasks = null;
@@ -258,5 +261,15 @@ class Config implements ExtensionConfigInterface
         $this->actionsOnAbandonedTask = $actionsOnAbandonedTask;
 
         return $this;
+    }
+
+    #[Assert\Callback]
+    public function validateAllowWearerToChooseTasks(ExecutionContextInterface $context, mixed $payload): void
+    {
+        if ($this->getPreventWearerFromAssigningTasks() && $this->getAllowWearerToChooseTasks()) {
+            $context->buildViolation('The wearer cannot choose their task if they cannot assign their own tasks.')
+                ->atPath('allowWearerToChooseTasks')
+                ->addViolation();
+        }
     }
 }
