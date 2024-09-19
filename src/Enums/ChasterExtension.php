@@ -75,6 +75,7 @@ enum ChasterExtension: string implements StringBackedEnumInterface
     {
         return [
             ChasterExtension::BETTER_DICE,
+            ChasterExtension::GAMES,
             ChasterExtension::DICE,
             ChasterExtension::FIND_THE_KEY_1,
             ChasterExtension::JIGSAW_PUZZLE,
@@ -144,6 +145,7 @@ enum ChasterExtension: string implements StringBackedEnumInterface
             ChasterExtension::BETTER_DICE, ChasterExtension::DICE => 'fa-solid fa-dice',
             ChasterExtension::BETTER_RANDOM_EVENTS => 'fa-solid fa-shuffle',
             ChasterExtension::FIND_THE_KEY_1 => 'fa-solid fa-key',
+            ChasterExtension::GAMES => 'fa-solid fa-chess-board',
             ChasterExtension::GUESS_TIMER => 'fa-solid fa-clock',
             ChasterExtension::JIGSAW_PUZZLE => 'fa-solid fa-puzzle-piece',
             ChasterExtension::LINK => 'fa-solid fa-link',
