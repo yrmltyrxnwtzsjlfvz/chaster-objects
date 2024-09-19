@@ -8,6 +8,7 @@ use DateInterval;
 use DateTimeInterface;
 use Fake\ChasterObjects\Enums\ActionLogRole;
 use Fake\ChasterObjects\Enums\ActionLogType;
+use Fake\ChasterObjects\Enums\ChasterExtension;
 use Fake\ChasterObjects\Objects\User as FakeUser;
 use SensitiveParameter;
 use Symfony\Component\Serializer\Annotation\DiscriminatorMap;
@@ -190,9 +191,9 @@ abstract class AbstractActionLog implements ActionLogInterface
     /**
      * @return $this
      */
-    public function setExtension(?string $extension): static
+    public function setExtension(ChasterExtension|string|null $extension): static
     {
-        $this->extension = $extension;
+        $this->extension = !is_null($extension) ? (ChasterExtension::tryNormalizeToEnum($extension) ?? $extension) : $extension;
 
         return $this;
     }
