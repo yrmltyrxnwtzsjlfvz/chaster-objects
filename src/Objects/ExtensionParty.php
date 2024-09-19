@@ -80,7 +80,7 @@ class ExtensionParty
      */
     private $updatedAt;
 
-    private $config;
+    protected $config;
 
     private $userData;
 

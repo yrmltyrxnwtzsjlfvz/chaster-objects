@@ -16,6 +16,9 @@ use Fake\ChasterObjects\Enums\HomeAction;
 use Fake\ChasterObjects\Enums\KeyholderUnavailable;
 use Fake\ChasterObjects\Enums\LockRole;
 use Fake\ChasterObjects\Enums\ReasonPreventingUnlock;
+use Fake\ChasterObjects\Objects\Extension\Task\ExtensionTasks;
+use Fake\ChasterObjects\Objects\Extension\TemporaryOpening\ExtensionTemporaryOpening;
+use Fake\ChasterObjects\Objects\Extension\VerificationPicture\ExtensionVerificationPicture;
 use Fake\ChasterObjects\Objects\Interfaces\FormattedNameInterface;
 use Fake\ChasterObjects\Objects\Interfaces\LockInterface;
 use Fake\ChasterObjects\Objects\Lock\ReasonPreventingUnlocking;
@@ -30,27 +33,27 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
 use function Symfony\Component\String\u;
 
 /**
- * @method ExtensionParty|null getDice()
- * @method ExtensionParty|null getGuessTimer()
- * @method ExtensionParty|null getLink()
- * @method ExtensionParty|null getPenalty()
- * @method ExtensionParty|null getPillory()
- * @method ExtensionParty|null getRandomEvents()
- * @method ExtensionParty|null getTasks()
- * @method ExtensionParty|null getTemporaryOpening()
- * @method ExtensionParty|null getVerificationPicture()
- * @method ExtensionParty|null getWheelOfFortune()
- * @method bool                hasDice()
- * @method bool                hasGuessTimer()
- * @method bool                hasLink()
- * @method bool                hasPenalty()
- * @method bool                hasPillory()
- * @method bool                hasRandomEvents()
- * @method bool                hasTasks()
- * @method bool                hasTemporaryOpening()
- * @method bool                hasVerificationPicture()
- * @method bool                hasWheelOfFortune()
- * @method bool                hasAnyGame()             Returns true if dice or wheel-of-fortune is present
+ * @method Extension\Dice\Extension|null           getDice()
+ * @method Extension\GuessTimer\Extension|null     getGuessTimer()
+ * @method Extension\Link\Extension|null           getLink()
+ * @method Extension\Penalty\Extension|null        getPenalty()
+ * @method Extension\Pillory\Extension|null        getPillory()
+ * @method Extension\RandomEvents\Extension|null   getRandomEvents()
+ * @method ExtensionTasks|null                     getTasks()
+ * @method ExtensionTemporaryOpening|null          getTemporaryOpening()
+ * @method ExtensionVerificationPicture|null       getVerificationPicture()
+ * @method Extension\WheelOfFortune\Extension|null getWheelOfFortune()
+ * @method bool                                    hasDice()
+ * @method bool                                    hasGuessTimer()
+ * @method bool                                    hasLink()
+ * @method bool                                    hasPenalty()
+ * @method bool                                    hasPillory()
+ * @method bool                                    hasRandomEvents()
+ * @method bool                                    hasTasks()
+ * @method bool                                    hasTemporaryOpening()
+ * @method bool                                    hasVerificationPicture()
+ * @method bool                                    hasWheelOfFortune()
+ * @method bool                                    hasAnyGame()             Returns true if dice or wheel-of-fortune is present
  */
 class Lock implements LockInterface, FormattedNameInterface
 {

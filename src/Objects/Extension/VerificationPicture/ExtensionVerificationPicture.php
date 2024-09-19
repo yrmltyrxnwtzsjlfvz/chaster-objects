@@ -9,7 +9,10 @@ use Fake\ChasterObjects\Objects\ExtensionParty;
 
 class ExtensionVerificationPicture extends ExtensionParty
 {
-    private ?Config $config = null;
+    /**
+     * @var Config|null
+     */
+    protected $config;
 
     private ?UserData $userData;
 

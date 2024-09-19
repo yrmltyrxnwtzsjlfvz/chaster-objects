@@ -11,7 +11,7 @@ class ExtensionTasks extends ExtensionParty
     /**
      * @var Config|null
      */
-    private $config;
+    protected $config;
 
     /**
      * @var UserData|null

@@ -7,7 +7,10 @@ use Fake\ChasterObjects\Objects\ExtensionParty;
 
 class ExtensionTemporaryOpening extends ExtensionParty
 {
-    private ?Config $config = null;
+    /**
+     * @var Config|null
+     */
+    protected $config;
 
     private ?UserData $userData = null;
 
