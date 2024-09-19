@@ -58,10 +58,7 @@ abstract class AbstractActionLog implements ActionLogInterface
     #[SerializedName('_id')]
     private $id;
 
-    /**
-     * @var string|null
-     */
-    private $type;
+    protected ?string $type = null;
 
     /**
      * @var string|null
@@ -73,10 +70,7 @@ abstract class AbstractActionLog implements ActionLogInterface
      */
     private $role;
 
-    /**
-     * @var string|null
-     */
-    private $extension;
+    protected ?string $extension = null;
 
     /**
      * @var string|null
@@ -193,7 +187,7 @@ abstract class AbstractActionLog implements ActionLogInterface
      */
     public function setExtension(ChasterExtension|string|null $extension): static
     {
-        $this->extension = !is_null($extension) ? (ChasterExtension::tryNormalizeToEnum($extension) ?? $extension) : $extension;
+        $this->extension = !is_null($extension) ? (ChasterExtension::tryNormalizeToValue($extension) ?? $extension) : $extension;
 
         return $this;
     }

@@ -6,6 +6,8 @@ use Fake\ChasterObjects\Objects\Lock\ActionLog\Payload\WheelOfFortunePayload;
 
 class WheelOfFortuneTurnedActionLog extends AbstractActionLog
 {
+    protected ?string $type = 'wheel_of_fortune_turned';
+
     private ?WheelOfFortunePayload $payload;
 
     public function getPayload(): ?WheelOfFortunePayload

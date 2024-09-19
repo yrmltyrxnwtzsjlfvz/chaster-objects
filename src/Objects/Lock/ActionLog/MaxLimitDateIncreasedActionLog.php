@@ -6,6 +6,8 @@ use Fake\ChasterObjects\Objects\Lock\ActionLog\Payload\MaxLimitIncreasedPayload;
 
 class MaxLimitDateIncreasedActionLog extends AbstractActionLog
 {
+    protected ?string $type = 'max_limit_date_increased';
+
     private ?MaxLimitIncreasedPayload $payload;
 
     public function getPayload(): ?MaxLimitIncreasedPayload

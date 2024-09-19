@@ -6,6 +6,8 @@ use Fake\ChasterObjects\Objects\Lock\ActionLog\Payload\TimeAddedPayload;
 
 class PilloryOutActionLog extends AbstractActionLog
 {
+    protected ?string $type = 'pillory_out';
+
     private ?TimeAddedPayload $payload;
 
     public function getPayload(): ?TimeAddedPayload

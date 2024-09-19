@@ -6,6 +6,8 @@ use Fake\ChasterObjects\Objects\Lock\ActionLog\Payload\TemporaryOpeningLockedPay
 
 class TemporaryOpeningLockedActionLog extends AbstractActionLog
 {
+    protected ?string $type = 'temporary_opening_locked';
+
     private ?TemporaryOpeningLockedPayload $payload;
 
     public function getPayload(): ?TemporaryOpeningLockedPayload

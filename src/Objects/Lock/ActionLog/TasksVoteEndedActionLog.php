@@ -6,6 +6,8 @@ use Fake\ChasterObjects\Objects\Lock\ActionLog\Payload\TaskPayload;
 
 class TasksVoteEndedActionLog extends AbstractActionLog
 {
+    protected ?string $type = 'tasks_vote_ended';
+
     private ?TaskPayload $payload;
 
     public function getPayload(): ?TaskPayload

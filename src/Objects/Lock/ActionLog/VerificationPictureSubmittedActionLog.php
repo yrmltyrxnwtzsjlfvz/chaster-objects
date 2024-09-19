@@ -6,6 +6,8 @@ use Fake\ChasterObjects\Objects\Lock\ActionLog\Payload\VerificationPictureSubmit
 
 class VerificationPictureSubmittedActionLog extends AbstractActionLog
 {
+    protected ?string $type = 'verification_picture_submitted';
+
     private ?VerificationPictureSubmittedPayload $payload;
 
     public function getPayload(): ?VerificationPictureSubmittedPayload

@@ -6,6 +6,8 @@ use Fake\ChasterObjects\Objects\Lock\ActionLog\Payload\TaskPayload;
 
 class TasksTaskAssignedActionLog extends AbstractActionLog
 {
+    protected ?string $type = 'tasks_task_assigned';
+
     private ?TaskPayload $payload;
 
     public function getPayload(): ?TaskPayload

@@ -6,6 +6,8 @@ use Fake\ChasterObjects\Objects\Lock\ActionLog\Payload\LinkTimeChangedPayload;
 
 class LinkTimeChangedActionLog extends AbstractActionLog
 {
+    protected ?string $type = 'link_time_changed';
+
     private ?LinkTimeChangedPayload $payload;
 
     public function getPayload(): ?LinkTimeChangedPayload

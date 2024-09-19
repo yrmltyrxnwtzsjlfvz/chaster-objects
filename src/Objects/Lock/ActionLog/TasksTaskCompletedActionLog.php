@@ -6,6 +6,8 @@ use Fake\ChasterObjects\Objects\Lock\ActionLog\Payload\TaskCompletionPayload;
 
 class TasksTaskCompletedActionLog extends AbstractActionLog
 {
+    protected ?string $type = 'tasks_task_completed';
+
     private ?TaskCompletionPayload $payload;
 
     public function getPayload(): ?TaskCompletionPayload

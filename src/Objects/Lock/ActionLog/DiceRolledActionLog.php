@@ -6,6 +6,8 @@ use Fake\ChasterObjects\Objects\Lock\ActionLog\Payload\DicePayload;
 
 class DiceRolledActionLog extends AbstractActionLog
 {
+    protected ?string $type = 'dice_rolled';
+
     private ?DicePayload $payload;
 
     public function getPayload(): ?DicePayload
