@@ -8,6 +8,8 @@ class TasksTaskAssignedActionLog extends AbstractActionLog
 {
     protected ?string $type = 'tasks_task_assigned';
 
+    protected ?string $extension = 'tasks';
+
     private ?TaskPayload $payload;
 
     public function getPayload(): ?TaskPayload

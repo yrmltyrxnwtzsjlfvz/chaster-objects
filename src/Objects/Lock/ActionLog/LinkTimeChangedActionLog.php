@@ -8,6 +8,8 @@ class LinkTimeChangedActionLog extends AbstractActionLog
 {
     protected ?string $type = 'link_time_changed';
 
+    protected ?string $extension = 'link';
+
     private ?LinkTimeChangedPayload $payload;
 
     public function getPayload(): ?LinkTimeChangedPayload

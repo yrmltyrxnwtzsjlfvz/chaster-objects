@@ -8,6 +8,8 @@ class TasksVoteEndedActionLog extends AbstractActionLog
 {
     protected ?string $type = 'tasks_vote_ended';
 
+    protected ?string $extension = 'tasks';
+
     private ?TaskPayload $payload;
 
     public function getPayload(): ?TaskPayload

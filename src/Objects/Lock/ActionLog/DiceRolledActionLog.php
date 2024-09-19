@@ -8,6 +8,8 @@ class DiceRolledActionLog extends AbstractActionLog
 {
     protected ?string $type = 'dice_rolled';
 
+    protected ?string $extension = 'dice';
+
     private ?DicePayload $payload;
 
     public function getPayload(): ?DicePayload

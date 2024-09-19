@@ -8,6 +8,8 @@ class TemporaryOpeningLockedActionLog extends AbstractActionLog
 {
     protected ?string $type = 'temporary_opening_locked';
 
+    protected ?string $extension = 'temporary-opening';
+
     private ?TemporaryOpeningLockedPayload $payload;
 
     public function getPayload(): ?TemporaryOpeningLockedPayload

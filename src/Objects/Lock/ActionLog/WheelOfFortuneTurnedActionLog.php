@@ -8,6 +8,8 @@ class WheelOfFortuneTurnedActionLog extends AbstractActionLog
 {
     protected ?string $type = 'wheel_of_fortune_turned';
 
+    protected ?string $extension = 'wheel-of-fortune';
+
     private ?WheelOfFortunePayload $payload;
 
     public function getPayload(): ?WheelOfFortunePayload

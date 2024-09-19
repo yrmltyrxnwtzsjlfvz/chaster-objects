@@ -8,6 +8,8 @@ class TasksTaskCompletedActionLog extends AbstractActionLog
 {
     protected ?string $type = 'tasks_task_completed';
 
+    protected ?string $extension = 'tasks';
+
     private ?TaskCompletionPayload $payload;
 
     public function getPayload(): ?TaskCompletionPayload
