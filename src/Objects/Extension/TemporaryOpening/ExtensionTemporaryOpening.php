@@ -12,7 +12,10 @@ class ExtensionTemporaryOpening extends ExtensionParty
      */
     protected $config;
 
-    private ?UserData $userData = null;
+    /**
+     * @var UserData|null
+     */
+    protected $userData;
 
     public function getUserData(): ?UserData
     {

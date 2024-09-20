@@ -4,32 +4,20 @@ namespace Fake\ChasterObjects\Objects\Extension\Task;
 
 use DateTimeInterface;
 use Fake\ChasterObjects\Objects\Extension\Penalty\Punishment;
-use Fake\ChasterObjects\Objects\ExtensionParty;
 
-class ExtensionTasks extends ExtensionParty
+/**
+ * @deprecated Since v0.4.16, this class is being renamed to {@see Extension}
+ */
+class ExtensionTasks extends Extension
 {
-    /**
-     * @var Config|null
-     */
-    protected $config;
-
-    /**
-     * @var UserData|null
-     */
-    private $userData;
-
     /**
      * @return array{pointsRequired: int|null, pointsEarned: int|null, pointsNeeded: int|null, assigned: Task|null, voteEndsAt: DateTimeInterface|null}
      */
     public function getTaskDetails(): array
     {
-        return [
-            'pointsRequired' => $this->getTaskPointsRequired(),
-            'pointsEarned' => $this->getTaskPointsEarned(),
-            'pointsNeeded' => $this->getTaskPointsNeeded(),
-            'assigned' => $this->getCurrentTask(),
-            'voteEndsAt' => $this->getTaskVoteEndsAt(),
-        ];
+        trigger_deprecation('fake34526/chaster-objects', '0.4.16', 'The "%s" class is being renamed to "%s".', __CLASS__, Extension::class);
+
+        return parent::getTaskDetails();
     }
 
     /**
@@ -37,12 +25,16 @@ class ExtensionTasks extends ExtensionParty
      */
     public function getTaskPointsRequired(): ?int
     {
-        return $this->getConfig()->getPointsRequired();
+        trigger_deprecation('fake34526/chaster-objects', '0.4.16', 'The "%s" class is being renamed to "%s".', __CLASS__, Extension::class);
+
+        return parent::getTaskPointsRequired();
     }
 
     public function getConfig(): ?Config
     {
-        return $this->config;
+        trigger_deprecation('fake34526/chaster-objects', '0.4.16', 'The "%s" class is being renamed to "%s".', __CLASS__, Extension::class);
+
+        return parent::getConfig();
     }
 
     /**
@@ -52,14 +44,16 @@ class ExtensionTasks extends ExtensionParty
      */
     public function setConfig($config): static
     {
-        $this->config = $config;
+        trigger_deprecation('fake34526/chaster-objects', '0.4.16', 'The "%s" class is being renamed to "%s".', __CLASS__, Extension::class);
 
-        return $this;
+        return parent::setConfig($config);
     }
 
     public function getTaskPointsEarned(): ?int
     {
-        return $this->getUserData()->getPoints();
+        trigger_deprecation('fake34526/chaster-objects', '0.4.16', 'The "%s" class is being renamed to "%s".', __CLASS__, Extension::class);
+
+        return parent::getTaskPointsEarned();
     }
 
     /**
@@ -67,22 +61,30 @@ class ExtensionTasks extends ExtensionParty
      */
     public function getTaskPointsNeeded(): ?int
     {
-        return $this->getTaskPointsRequired() - $this->getTaskPointsEarned();
+        trigger_deprecation('fake34526/chaster-objects', '0.4.16', 'The "%s" class is being renamed to "%s".', __CLASS__, Extension::class);
+
+        return parent::getTaskPointsNeeded();
     }
 
     public function getCurrentTask(): ?Task
     {
-        return $this->getUserData()?->getCurrentTask();
+        trigger_deprecation('fake34526/chaster-objects', '0.4.16', 'The "%s" class is being renamed to "%s".', __CLASS__, Extension::class);
+
+        return parent::getCurrentTask();
     }
 
     public function hasCurrentTask(): bool
     {
-        return !empty($this->getCurrentTask());
+        trigger_deprecation('fake34526/chaster-objects', '0.4.16', 'The "%s" class is being renamed to "%s".', __CLASS__, Extension::class);
+
+        return parent::hasCurrentTask();
     }
 
     public function getUserData(): ?UserData
     {
-        return $this->userData;
+        trigger_deprecation('fake34526/chaster-objects', '0.4.16', 'The "%s" class is being renamed to "%s".', __CLASS__, Extension::class);
+
+        return parent::getUserData();
     }
 
     /**
@@ -92,24 +94,30 @@ class ExtensionTasks extends ExtensionParty
      */
     public function setUserData($userData): static
     {
-        $this->userData = $userData;
+        trigger_deprecation('fake34526/chaster-objects', '0.4.16', 'The "%s" class is being renamed to "%s".', __CLASS__, Extension::class);
 
-        return $this;
+        return parent::setUserData($userData);
     }
 
     public function getTaskVoteEndsAt(): ?DateTimeInterface
     {
-        return $this->getUserData()?->getTaskVoteEndsAt();
+        trigger_deprecation('fake34526/chaster-objects', '0.4.16', 'The "%s" class is being renamed to "%s".', __CLASS__, Extension::class);
+
+        return parent::getTaskVoteEndsAt();
     }
 
     public function getTaskVoteId(): ?string
     {
-        return $this->getUserData()?->getTaskVoteId();
+        trigger_deprecation('fake34526/chaster-objects', '0.4.16', 'The "%s" class is being renamed to "%s".', __CLASS__, Extension::class);
+
+        return parent::getTaskVoteId();
     }
 
     public function isVoting(): bool
     {
-        return $this->getUserData()?->isVoting() ?? false;
+        trigger_deprecation('fake34526/chaster-objects', '0.4.16', 'The "%s" class is being renamed to "%s".', __CLASS__, Extension::class);
+
+        return parent::isVoting();
     }
 
     /**
@@ -117,6 +125,8 @@ class ExtensionTasks extends ExtensionParty
      */
     public function getActionsOnAbandonedTask(): ?array
     {
-        return $this->getConfig()?->getActionsOnAbandonedTask();
+        trigger_deprecation('fake34526/chaster-objects', '0.4.16', 'The "%s" class is being renamed to "%s".', __CLASS__, Extension::class);
+
+        return parent::getActionsOnAbandonedTask();
     }
 }

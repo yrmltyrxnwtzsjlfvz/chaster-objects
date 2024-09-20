@@ -28,7 +28,7 @@
     },
     "conflict": {
         "phpunit/phpunit": "<9.5 | 9.5.8 | >=10",
-        "fake34526/chaster-factory": "0.4.0"
+        "fake34526/chaster-factory": "<0.4.15"
     },
     "autoload": {
         "psr-4": {

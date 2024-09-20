@@ -16,7 +16,6 @@ use Fake\ChasterObjects\Enums\HomeAction;
 use Fake\ChasterObjects\Enums\KeyholderUnavailable;
 use Fake\ChasterObjects\Enums\LockRole;
 use Fake\ChasterObjects\Enums\ReasonPreventingUnlock;
-use Fake\ChasterObjects\Objects\Extension\Task\ExtensionTasks;
 use Fake\ChasterObjects\Objects\Extension\TemporaryOpening\ExtensionTemporaryOpening;
 use Fake\ChasterObjects\Objects\Extension\VerificationPicture\ExtensionVerificationPicture;
 use Fake\ChasterObjects\Objects\Interfaces\FormattedNameInterface;
@@ -39,7 +38,7 @@ use function Symfony\Component\String\u;
  * @method Extension\Penalty\Extension|null        getPenalty()
  * @method Extension\Pillory\Extension|null        getPillory()
  * @method Extension\RandomEvents\Extension|null   getRandomEvents()
- * @method ExtensionTasks|null                     getTasks()
+ * @method Extension\Task\Extension|null           getTasks()
  * @method ExtensionTemporaryOpening|null          getTemporaryOpening()
  * @method ExtensionVerificationPicture|null       getVerificationPicture()
  * @method Extension\WheelOfFortune\Extension|null getWheelOfFortune()
@@ -62,155 +61,81 @@ class Lock implements LockInterface, FormattedNameInterface
     use LockTrait;
     use LockIdNormalizerTrait;
 
-    /**
-     * @var ChasterLockStatus|null
-     */
-    private $status;
+    private ?ChasterLockStatus $status = null;
 
-    /**
-     * @var SharedLock|null
-     */
-    private $sharedLock;
+    private ?SharedLock $sharedLock = null;
 
-    /**
-     * @var DateTimeInterface|null
-     */
-    private $endDate;
+    private ?DateTimeInterface $endDate = null;
 
-    /**
-     * @var string|null
-     */
-    private $title;
+    private ?string $title = null;
 
-    /**
-     * @var int|null
-     */
-    private $totalDuration;
+    private ?int $totalDuration = null;
 
     #[SerializedName('isTestLock')]
     private ?bool $testLock = null;
 
-    /**
-     * @var LockRole|null
-     */
-    private $role;
+    private ?LockRole $role = null;
 
-    /**
-     * @var bool|null
-     */
     #[SerializedName('isAllowedToViewTime')]
-    private $allowedToViewTime;
+    private ?bool $allowedToViewTime = null;
 
-    /**
-     * @var bool|null
-     */
     #[SerializedName('canBeUnlocked')]
-    private $lockUnlockable;
+    private ?bool $lockUnlockable = null;
 
-    /**
-     * @var bool|null
-     */
-    private $canBeUnlockedByMaxLimitDate;
+    private ?bool $canBeUnlockedByMaxLimitDate = null;
 
-    /**
-     * @var bool|null
-     */
     #[SerializedName('isFrozen')]
-    private $frozen;
+    private ?bool $frozen = null;
 
     /**
      * @var ExtensionParty[]|null
      */
-    private $extensions = [];
+    private ?array $extensions = [];
 
     /**
      * @var ExtensionHomeActionWithPartyId[]
      */
-    private $availableHomeActions = [];
+    private array $availableHomeActions = [];
 
     /**
      * @var ReasonPreventingUnlocking[]
      */
-    private $reasonsPreventingUnlocking = [];
+    private array $reasonsPreventingUnlocking = [];
 
     private ?bool $extensionsAllowUnlocking = null;
 
-    /**
-     * @var DateTimeInterface|null
-     */
-    private $updatedAt;
+    private ?DateTimeInterface $updatedAt = null;
 
-    /**
-     * @var DateTimeInterface|null
-     */
-    private $startDate;
+    private ?DateTimeInterface $startDate = null;
 
-    /**
-     * @var DateTimeInterface|null
-     */
-    private $minDate;
+    private ?DateTimeInterface $minDate = null;
 
-    /**
-     * @var DateTimeInterface|null
-     */
-    private $maxDate;
+    private ?DateTimeInterface $maxDate = null;
 
-    /**
-     * @var bool|null
-     */
-    private $displayRemainingTime;
+    private ?bool $displayRemainingTime = null;
 
-    /**
-     * @var bool|null
-     */
-    private $limitLockTime;
+    private ?bool $limitLockTime = null;
 
-    /**
-     * @var DateTimeInterface|null
-     */
-    private $deletedAt;
+    private ?DateTimeInterface $deletedAt = null;
 
-    /**
-     * @var DateTimeInterface|null
-     */
-    private $unlockedAt;
+    private ?DateTimeInterface $unlockedAt = null;
 
-    /**
-     * @var DateTimeInterface|null
-     */
-    private $archivedAt;
+    private ?DateTimeInterface $archivedAt = null;
 
-    /**
-     * @var DateTimeInterface|null
-     */
-    private $frozenAt;
+    private ?DateTimeInterface $frozenAt = null;
 
-    /**
-     * @var DateTimeInterface|null
-     */
-    private $keyholderArchivedAt;
+    private ?DateTimeInterface $keyholderArchivedAt = null;
 
-    /**
-     * @var bool|null
-     */
-    private $hideTimeLogs;
+    private ?bool $hideTimeLogs = null;
 
     /**
      * Whether the keyholder is trusted.
-     *
-     * @var bool|null
      */
-    private $trusted;
+    private ?bool $trusted = null;
 
-    /**
-     * @var User|null
-     */
-    private $user;
+    private ?User $user = null;
 
-    /**
-     * @var User|null
-     */
-    private $keyholder;
+    private ?User $keyholder = null;
 
     private ?KeyholderUnavailable $keyholderUnavailable = null;
 

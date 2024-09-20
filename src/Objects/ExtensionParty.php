@@ -3,7 +3,6 @@
 namespace Fake\ChasterObjects\Objects;
 
 use DateTimeInterface;
-use Fake\ChasterObjects\Objects\Extension\Task\ExtensionTasks;
 use Fake\ChasterObjects\Objects\Extension\TemporaryOpening\ExtensionTemporaryOpening;
 use Fake\ChasterObjects\Objects\Extension\VerificationPicture\ExtensionVerificationPicture;
 use Fake\ChasterObjects\Objects\Traits\ExtensionTrait;
@@ -11,7 +10,7 @@ use Symfony\Component\Serializer\Annotation\DiscriminatorMap;
 use Symfony\Component\Serializer\Annotation\SerializedName;
 
 #[DiscriminatorMap(typeProperty: 'slug', mapping: [
-    'tasks' => ExtensionTasks::class,
+    'tasks' => Extension\Task\Extension::class,
     'temporary-opening' => ExtensionTemporaryOpening::class,
     'verification-picture' => ExtensionVerificationPicture::class,
     'better-dice' => Extension\Partner\BetterDice\Extension::class,
@@ -82,7 +81,7 @@ class ExtensionParty
 
     protected $config;
 
-    private $userData;
+    protected $userData;
 
     public function getExtensionPartyId(): ?string
     {

@@ -14,7 +14,10 @@ class ExtensionVerificationPicture extends ExtensionParty
      */
     protected $config;
 
-    private ?UserData $userData;
+    /**
+     * @var UserData|null
+     */
+    protected $userData;
 
     public function getUserData(): ?UserData
     {
