@@ -135,6 +135,8 @@ enum ChasterExtension: string implements StringBackedEnumInterface
     {
         return match ($this) {
             ChasterExtension::DICE => 'icon-fa-dice',
+            ChasterExtension::PILLORY => 'icon-dominatrix-whip-alt',
+            ChasterExtension::WHEEL_OF_FORTUNE => 'icon-wheel-of-fortune',
             default => $this->getIcon(),
         };
     }
@@ -150,13 +152,13 @@ enum ChasterExtension: string implements StringBackedEnumInterface
             ChasterExtension::JIGSAW_PUZZLE => 'fa-solid fa-puzzle-piece',
             ChasterExtension::LINK => 'fa-solid fa-link',
             ChasterExtension::PENALTY => 'fa-solid fa-gavel',
-            ChasterExtension::PILLORY => 'icon-dominatrix-whip-alt',
+            ChasterExtension::PILLORY => 'fa-user-dice',
             ChasterExtension::RANDOM_EVENTS => 'fa-solid fa-random',
             ChasterExtension::TASKS => 'fa-solid fa-tasks',
             ChasterExtension::TEMPORARY_OPENING => 'fa-solid fa-soap',
             ChasterExtension::UNLOCK_CONDITION => 'fa-solid fa-traffic-light-slow',
             ChasterExtension::VERIFICATION_PICTURE => 'fa-solid fa-camera',
-            ChasterExtension::WHEEL_OF_FORTUNE => 'icon-wheel-of-fortune',
+            ChasterExtension::WHEEL_OF_FORTUNE => 'fa-solid fa-dharmachakra',
             ChasterExtension::WORDLE => 'fa-solid fa-border-all',
             default => throw new ValueError(),
         };
