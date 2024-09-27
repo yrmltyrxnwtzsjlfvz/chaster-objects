@@ -152,7 +152,7 @@ enum ChasterExtension: string implements StringBackedEnumInterface
             ChasterExtension::JIGSAW_PUZZLE => 'fa-solid fa-puzzle-piece',
             ChasterExtension::LINK => 'fa-solid fa-link',
             ChasterExtension::PENALTY => 'fa-solid fa-gavel',
-            ChasterExtension::PILLORY => 'fa-user-dice',
+            ChasterExtension::PILLORY => 'fa-solid fa-user-friends',
             ChasterExtension::RANDOM_EVENTS => 'fa-solid fa-random',
             ChasterExtension::TASKS => 'fa-solid fa-tasks',
             ChasterExtension::TEMPORARY_OPENING => 'fa-solid fa-soap',
