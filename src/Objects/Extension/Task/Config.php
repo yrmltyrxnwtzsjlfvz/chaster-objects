@@ -2,8 +2,10 @@
 
 namespace Fake\ChasterObjects\Objects\Extension\Task;
 
+use Fake\ChasterObjects\Enums\PunishmentType;
 use Fake\ChasterObjects\Objects\Extension\ExtensionConfigInterface;
 use Fake\ChasterObjects\Objects\Extension\Penalty\Punishment;
+use Illuminate\Support\Arr;
 use JetBrains\PhpStorm\Deprecated;
 use Symfony\Component\Serializer\Attribute\SerializedName;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -313,6 +315,13 @@ class Config implements ExtensionConfigInterface
         $this->actionsOnAbandonedTask = $actionsOnAbandonedTask;
 
         return $this;
+    }
+
+    public function hasPunishment(PunishmentType $type): bool
+    {
+        return !empty( Arr::where($this->getActionsOnAbandonedTask(), function (Punishment $punishment) use ($type) {
+            return $punishment->getType()->equals($type);
+        }));
     }
 
     #[Assert\Callback]

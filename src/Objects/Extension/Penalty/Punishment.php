@@ -3,6 +3,7 @@
 namespace Fake\ChasterObjects\Objects\Extension\Penalty;
 
 use Fake\ChasterObjects\Enums\ChasterKeyholderActions;
+use Fake\ChasterObjects\Enums\PunishmentType;
 use JsonSerializable;
 
 class Punishment implements JsonSerializable
@@ -17,6 +18,11 @@ class Punishment implements JsonSerializable
     public function getName(): ?string
     {
         return $this->name;
+    }
+
+    public function getType(): ?PunishmentType
+    {
+        return PunishmentType::tryNormalizeToEnum($this->name);
     }
 
     /**
