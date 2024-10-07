@@ -319,7 +319,7 @@ class Config implements ExtensionConfigInterface
 
     public function hasPunishment(PunishmentType $type): bool
     {
-        return !empty( Arr::where($this->getActionsOnAbandonedTask(), function (Punishment $punishment) use ($type) {
+        return !empty(Arr::where($this->getActionsOnAbandonedTask(), function (Punishment $punishment) use ($type) {
             return $punishment->getType()->equals($type);
         }));
     }
