@@ -56,6 +56,11 @@ class ExtensionTemporaryOpening extends ExtensionParty
         return $this->getUserData()?->isOpen() ?? false;
     }
 
+    public function canWearerUnlock(): bool
+    {
+        return !$this->isOpen() && !$this->getConfig()->isKeyholderOpenOnly() && $this->getNbActionsRemaining() > 0;
+    }
+
     public function getOpenedAt(): ?DateTimeInterface
     {
         return $this->getUserData()?->getOpenedAt();
