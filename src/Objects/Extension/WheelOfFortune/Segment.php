@@ -25,6 +25,11 @@ class Segment
         return $this;
     }
 
+    public function isText(): bool
+    {
+        return $this->getType()?->equals(WheelOfFortuneSegmentType::TEXT) ?? false;
+    }
+
     public function getText(): ?string
     {
         return $this->text;
