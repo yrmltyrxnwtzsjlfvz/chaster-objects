@@ -5,8 +5,11 @@ namespace Fake\ChasterObjects\Tests\Objects\Lock;
 use DateInterval;
 use Fake\ChasterFactory\Factory\ExtensionHomeActionWithPartyIdFactory;
 use Fake\ChasterFactory\Factory\ExtensionPartyFactory;
+use Fake\ChasterFactory\Factory\LockFactory;
+use Fake\ChasterFactory\Factory\SharedLockFactory;
 use Fake\ChasterObjects\Enums\HomeAction;
 use Fake\ChasterObjects\Objects\Lock;
+use Faker\Factory;
 use Generator;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Clock\Clock;
@@ -220,5 +223,37 @@ class LockTest extends TestCase
         ]);
 
         self::assertTrue($lock->isTaskAssigned());
+    }
+
+    /**
+     * @dataProvider provideIsSharedLock
+     * @param \Fake\ChasterFactory\Factory\LockFactory $lockFactory
+     * @param ?string $arg
+     * @param bool $expected
+     * @return void
+     */
+    public function testIsSharedLock($lockFactory, $arg, $expected)
+    {
+        $lock = $lockFactory->create();
+
+        self::assertSame($expected, $lock->isSharedLock($arg));
+    }
+
+    public static function provideIsSharedLock(): Generator
+    {
+        $faker = Factory::create();
+        $sharedId = $faker->unique()->md5();
+        $sharedLock = (new Lock\SharedLock())->setId($sharedId);
+        $lock = LockFactory::new(['sharedLock' => $sharedLock]);
+
+        yield ['lock' => $lock, 'arg' => $sharedId, 'expected' => true];
+        yield ['lock' => $lock, 'arg' => null, 'expected' => true];
+        yield ['lock' => $lock, 'arg' => '', 'expected' => true];
+        yield ['lock' => $lock, 'arg' => $faker->unique()->md5(), 'expected' => false];
+
+        $lock = LockFactory::new(['sharedLock' => null]);
+        yield ['lock' => $lock, 'arg' => $faker->unique()->md5(), 'expected' => false];
+        yield ['lock' => $lock, 'arg' => null, 'expected' => false];
+        yield ['lock' => $lock, 'arg' => '', 'expected' => false];
     }
 }

@@ -176,6 +176,19 @@ class Lock implements LockInterface, FormattedNameInterface
         return $this;
     }
 
+    public function isSharedLock(?string $lockId = null): bool
+    {
+        if (is_null($this->getSharedLock())) {
+            return false;
+        }
+
+        if (empty($lockId)) {
+            return true;
+        }
+
+        return $this->getSharedLock()->getId() === $lockId;
+    }
+
     public function getEndDate(): ?DateTimeInterface
     {
         return $this->endDate;
