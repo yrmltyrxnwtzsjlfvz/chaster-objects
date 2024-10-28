@@ -59,6 +59,19 @@ trait InfoTrait
         return $this;
     }
 
+    public function getProgressPercentage(): ?float
+    {
+        if (empty($this->getMinVotes())) {
+            return null;
+        }
+
+        if (empty($this->getVotes())) {
+            return 0;
+        }
+
+        return round($this->getVotes() / $this->getMinVotes() * 100, 0);
+    }
+
     /**
      * @return $this
      */
