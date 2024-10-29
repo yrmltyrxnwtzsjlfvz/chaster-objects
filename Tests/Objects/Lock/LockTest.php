@@ -6,7 +6,6 @@ use DateInterval;
 use Fake\ChasterFactory\Factory\ExtensionHomeActionWithPartyIdFactory;
 use Fake\ChasterFactory\Factory\ExtensionPartyFactory;
 use Fake\ChasterFactory\Factory\LockFactory;
-use Fake\ChasterFactory\Factory\SharedLockFactory;
 use Fake\ChasterObjects\Enums\HomeAction;
 use Fake\ChasterObjects\Objects\Lock;
 use Faker\Factory;
@@ -227,9 +226,11 @@ class LockTest extends TestCase
 
     /**
      * @dataProvider provideIsSharedLock
-     * @param \Fake\ChasterFactory\Factory\LockFactory $lockFactory
-     * @param ?string $arg
-     * @param bool $expected
+     *
+     * @param LockFactory $lockFactory
+     * @param ?string     $arg
+     * @param bool        $expected
+     *
      * @return void
      */
     public function testIsSharedLock($lockFactory, $arg, $expected)
