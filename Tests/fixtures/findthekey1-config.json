@@ -1,0 +1,546 @@
+{
+  "keyspresented": 15,
+  "unfairslevel": "-1",
+  "onstart": [
+    {
+      "action": "block"
+    }
+  ],
+  "oncorrect": [
+    {
+      "action": "unblock"
+    },
+    {
+      "action": "togglefreeze"
+    }
+  ],
+  "onwrong": [
+    {
+      "action": "replaceguessedkey"
+    },
+    {
+      "action": "addtime",
+      "time": 3600
+    },
+    {
+      "action": "addfakekeys",
+      "number": 1
+    }
+  ],
+  "textConfig": "",
+  "unfairsenabled": true,
+  "showAdvanced": true,
+  "startupBlockers": [
+    {
+      "type": "jigsaw_complete"
+    },
+    {
+      "type": "turn_wheel_of_fortune"
+    }
+  ],
+  "startupUnfairs": [
+    {
+      "type": "blocker_freeze",
+      "guess": 1,
+      "guessmax": 100,
+      "guessmin": 1
+    },
+    {
+      "type": "hidekeys",
+      "guess": 1,
+      "guessmax": 40,
+      "guessmin": 1
+    },
+    {
+      "type": "liecorrect",
+      "guess": 1,
+      "guessmax": 20,
+      "guessmin": 1
+    },
+    {
+      "type": "nocorrectkey",
+      "guess": 9,
+      "guessmin": 9,
+      "guessmax": 50
+    },
+    {
+      "type": "delayactions",
+      "guess": 1,
+      "time": 604800,
+      "guessmax": 30,
+      "guessmin": 1
+    },
+    {
+      "type": "doubleactions",
+      "guess": 1,
+      "guessmax": 30,
+      "guessmin": 1
+    },
+    {
+      "type": "unabletoguess",
+      "guess": 1,
+      "guessmax": 5,
+      "guessmin": 1
+    },
+    {
+      "type": "blocker_turn_wheel_of_fortune",
+      "guess": 3,
+      "guessmin": 1,
+      "guessmax": 20
+    },
+    {
+      "type": "twins",
+      "guess": 42,
+      "guessmin": 30,
+      "guessmax": 50
+    }
+  ],
+  "startupUnfairSettings": {
+    "default": {
+      "unabletoguess": 0,
+      "delayactions": 0,
+      "hidekeys": 0,
+      "doubleactions": 0,
+      "twins": 0,
+      "nocorrectkey": 0,
+      "liecorrect": 0,
+      "blocktime": 0,
+      "blocktime_time": 60,
+      "delayactions_time": 60,
+      "blockverification": 0,
+      "blockjigsaw_complete": 0,
+      "blockshared_link": 0,
+      "blockturn_wheel_of_fortune": 0,
+      "blocktask_completed": 0,
+      "blocktask_failed": 0
+    },
+    "user": {
+      "unabletoguess": 33,
+      "delayactions": 33,
+      "hidekeys": 40,
+      "doubleactions": 33,
+      "twins": 33,
+      "nocorrectkey": 33,
+      "liecorrect": 15,
+      "blocktime": 20,
+      "blocktime_time": 86400,
+      "delayactions_time": 86400,
+      "blockverification": 10,
+      "blockjigsaw_complete": 10,
+      "blockshared_link": 1,
+      "blockturn_wheel_of_fortune": 10,
+      "blocktask_completed": 10,
+      "blocktask_failed": 5
+    }
+  },
+  "oncustom": [
+    {
+      "event": "link_time_changed_added",
+      "detail": "",
+      "actions": [
+        {
+          "action": "resetkeys",
+          "number": 20
+        },
+        {
+          "action": "changekey",
+          "number": 10
+        },
+        {
+          "action": "removefakekeys",
+          "number": 1
+        }
+      ]
+    },
+    {
+      "event": "link_time_changed_removed",
+      "detail": "",
+      "actions": [
+        {
+          "action": "addfakekeys",
+          "number": 3
+        },
+        {
+          "action": "resetkeys",
+          "number": 10
+        },
+        {
+          "action": "changekey",
+          "number": 5
+        },
+        {
+          "action": "change",
+          "number": 1
+        }
+      ]
+    },
+    {
+      "event": "guess_timer_success",
+      "detail": "",
+      "actions": [
+        {
+          "action": "addfakekeys",
+          "number": 2
+        },
+        {
+          "action": "resetkeys",
+          "number": 10
+        },
+        {
+          "action": "changekey",
+          "number": 5
+        },
+        {
+          "action": "change",
+          "number": 1
+        }
+      ]
+    },
+    {
+      "event": "guess_timer_failed",
+      "detail": "",
+      "actions": [
+        {
+          "action": "resetkeys",
+          "number": 20
+        },
+        {
+          "action": "changekey",
+          "number": 10
+        },
+        {
+          "action": "removefakekeys",
+          "number": 1
+        }
+      ]
+    },
+    {
+      "event": "tasks_task_completed",
+      "detail": "",
+      "actions": [
+        {
+          "action": "resetkeys",
+          "number": 20
+        },
+        {
+          "action": "changekey",
+          "number": 10
+        },
+        {
+          "action": "removefakekeys",
+          "number": 1
+        }
+      ]
+    },
+    {
+      "event": "tasks_task_failed",
+      "detail": "",
+      "actions": [
+        {
+          "action": "addfakekeys",
+          "number": 2
+        },
+        {
+          "action": "resetkeys",
+          "number": 10
+        },
+        {
+          "action": "changekey",
+          "number": 5
+        },
+        {
+          "action": "change",
+          "number": 1
+        }
+      ]
+    },
+    {
+      "event": "knowablewrong",
+      "detail": "",
+      "actions": [
+        {
+          "action": "addfakekeys",
+          "number": 2
+        },
+        {
+          "action": "resetkeys",
+          "number": 1
+        },
+        {
+          "action": "addtime",
+          "time": 43200
+        },
+        {
+          "action": "freeze"
+        },
+        {
+          "action": "pillory",
+          "time": 10800
+        }
+      ]
+    },
+    {
+      "event": "on_guess_every",
+      "detail": 2,
+      "actions": [
+        {
+          "action": "changekey",
+          "number": 20
+        },
+        {
+          "action": "resetkeys",
+          "number": 20
+        },
+        {
+          "action": "change",
+          "number": 1
+        }
+      ]
+    },
+    {
+      "event": "on_guess_every",
+      "detail": 4,
+      "actions": [
+        {
+          "action": "removefakekeys",
+          "number": 1
+        },
+        {
+          "action": "change",
+          "number": 1
+        },
+        {
+          "action": "changekey",
+          "number": 10
+        },
+        {
+          "action": "resetkeys",
+          "number": 10
+        },
+        {
+          "action": "addtime",
+          "time": 3600
+        }
+      ]
+    },
+    {
+      "event": "on_guess_every",
+      "detail": 6,
+      "actions": [
+        {
+          "action": "removefakekeys",
+          "number": 2
+        },
+        {
+          "action": "addtime",
+          "time": 3600
+        },
+        {
+          "action": "freeze"
+        },
+        {
+          "action": "pillory",
+          "time": 3600
+        }
+      ]
+    },
+    {
+      "event": "on_guess_every",
+      "detail": 10,
+      "actions": [
+        {
+          "action": "removefakekeys",
+          "number": 3
+        },
+        {
+          "action": "addtime",
+          "time": 7200
+        },
+        {
+          "action": "togglefreeze"
+        }
+      ]
+    },
+    {
+      "event": "on_guess_every",
+      "detail": 17,
+      "actions": [
+        {
+          "action": "removefakekeys",
+          "number": 6
+        },
+        {
+          "action": "addtime",
+          "time": 21600
+        },
+        {
+          "action": "freeze"
+        }
+      ]
+    },
+    {
+      "event": "wheel_of_fortune_turned",
+      "detail": "Add 5 keys",
+      "actions": [
+        {
+          "action": "addfakekeys",
+          "number": 5
+        },
+        {
+          "action": "resetkeys",
+          "number": 10
+        }
+      ]
+    },
+    {
+      "event": "wheel_of_fortune_turned",
+      "detail": "Remove 5 keys",
+      "actions": [
+        {
+          "action": "removefakekeys",
+          "number": 5
+        },
+        {
+          "action": "freeze"
+        },
+        {
+          "action": "change",
+          "number": 5
+        },
+        {
+          "action": "changekey",
+          "number": 1
+        },
+        {
+          "action": "resetkeys",
+          "number": 5
+        }
+      ]
+    },
+    {
+      "event": "wheel_of_fortune_turned",
+      "detail": "Remove 10 keys",
+      "actions": [
+        {
+          "action": "removefakekeys",
+          "number": 10
+        },
+        {
+          "action": "change",
+          "number": 10
+        },
+        {
+          "action": "changekey",
+          "number": 1
+        },
+        {
+          "action": "resetkeys",
+          "number": 2
+        },
+        {
+          "action": "freeze"
+        },
+        {
+          "action": "pillory",
+          "time": 3600
+        }
+      ]
+    },
+    {
+      "event": "wheel_of_fortune_turned",
+      "detail": "Remove 20 keys",
+      "actions": [
+        {
+          "action": "removefakekeys",
+          "number": 20
+        },
+        {
+          "action": "resetkeys",
+          "number": 1
+        },
+        {
+          "action": "addtime",
+          "time": 432000
+        },
+        {
+          "action": "freeze"
+        },
+        {
+          "action": "pillory",
+          "time": 21600
+        }
+      ]
+    },
+    {
+      "event": "wheel_of_fortune_turned",
+      "detail": "Restart the game",
+      "actions": [
+        {
+          "action": "restartgame"
+        },
+        {
+          "action": "addfakekeys",
+          "number": 40
+        },
+        {
+          "action": "removetime",
+          "time": 518400
+        }
+      ]
+    },
+    {
+      "event": "wheel_of_fortune_turned",
+      "detail": "Add 10 keys",
+      "actions": [
+        {
+          "action": "addfakekeys",
+          "number": 10
+        },
+        {
+          "action": "resetkeys",
+          "number": 20
+        }
+      ]
+    },
+    {
+      "event": "wheel_of_fortune_turned",
+      "detail": "Add 20 keys",
+      "actions": [
+        {
+          "action": "addfakekeys",
+          "number": 20
+        },
+        {
+          "action": "resetkeys",
+          "number": 40
+        }
+      ]
+    },
+    {
+      "event": "wheel_of_fortune_turned",
+      "detail": "Remove 30 keys",
+      "actions": [
+        {
+          "action": "removefakekeys",
+          "number": 30
+        },
+        {
+          "action": "resetkeys",
+          "number": 1
+        },
+        {
+          "action": "addtime",
+          "time": 864000
+        },
+        {
+          "action": "freeze"
+        },
+        {
+          "action": "pillory",
+          "time": 36000
+        }
+      ]
+    }
+  ],
+  "hideconfig": true
+}
