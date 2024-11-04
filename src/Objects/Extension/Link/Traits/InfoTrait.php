@@ -59,6 +59,22 @@ trait InfoTrait
         return $this;
     }
 
+    public function getVotesRemaining(): int
+    {
+        if (empty($this->getMinVotes())) {
+            return 0;
+        }
+
+        if (empty($this->getVotes())) {
+            return $this->getMinVotes();
+        }
+        if ($this->getMinVotes() <= $this->getVotes()) {
+            return 0;
+        }
+
+        return $this->getMinVotes() - $this->getVotes();
+    }
+
     public function getProgressPercentage(): ?float
     {
         if (empty($this->getMinVotes())) {
@@ -69,7 +85,7 @@ trait InfoTrait
             return 0;
         }
 
-        return round($this->getVotes() / $this->getMinVotes() * 100, 0);
+        return floor($this->getVotes() / $this->getMinVotes() * 100);
     }
 
     /**
