@@ -5,6 +5,7 @@ namespace Fake\ChasterObjects\Objects;
 use DateTimeInterface;
 use Fake\ChasterObjects\Objects\Extension\TemporaryOpening\ExtensionTemporaryOpening;
 use Fake\ChasterObjects\Objects\Extension\VerificationPicture\ExtensionVerificationPicture;
+use Fake\ChasterObjects\Objects\Interfaces\LockInterface;
 use Fake\ChasterObjects\Objects\Traits\ExtensionTrait;
 use Symfony\Component\Serializer\Annotation\DiscriminatorMap;
 use Symfony\Component\Serializer\Annotation\SerializedName;
@@ -243,5 +244,10 @@ class ExtensionParty
         $this->userData = $userData;
 
         return $this;
+    }
+
+    public function getExtensionUrl(LockInterface|string $lock): ?string
+    {
+        return sprintf('https://chaster.app/locks/%s/extensions/%s', Lock::normalizeToLockId(lock: $lock), $this->getExtensionPartyId());
     }
 }
