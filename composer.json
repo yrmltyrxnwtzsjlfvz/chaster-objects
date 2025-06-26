@@ -10,7 +10,7 @@
         "mrgoodbytes8667/string-mask-bundle": "^1.0"
     },
     "require-dev": {
-        "fake34526/chaster-factory": "0.4.*",
+        "fake34526/chaster-factory": "^0.4",
         "friendsofphp/php-cs-fixer": "^3.4",
         "mrgoodbytes8667/test-common": "^0.2.5 | ^0.3 | ^0.4.2",
         "rector/rector": "^1.0",
