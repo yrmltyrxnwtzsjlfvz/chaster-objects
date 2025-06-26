@@ -3,32 +3,35 @@
 namespace Fake\ChasterObjects\Tests\Objects\Extension\Penalty\Habit;
 
 use Fake\ChasterObjects\Objects\Extension\Penalty\Habit\TimeLimit;
+use Faker\Factory;
 use Generator;
+use PHPUnit\Framework\TestCase;
 use Zenstruck\Foundry\Test\Factories;
 
-class TimeLimitTest extends HabitTest
+class TimeLimitTest extends TestCase
 {
     use Factories;
 
-    public static function provideGetSetCount(): Generator
+    public static function provideGetSetName(): Generator
     {
-        yield 'null' => ['count' => null];
-        foreach (range(1, 10) as $i) {
-            yield $i => ['count' => $i];
-        }
+        $faker = Factory::create();
+        yield [$faker->unique()->word()];
+        yield [$faker->unique()->word()];
+        yield [$faker->unique()->word()];
+        yield [$faker->unique()->word()];
     }
 
     /**
-     * @dataProvider provideGetSetCount
+     * @dataProvider provideGetSetName
      *
      * @return void
      */
-    public function testGetSetCount($count)
+    public function testGetSetName($name)
     {
         $timeLimit = new TimeLimit();
-        self::assertEquals(1, $timeLimit->getCount());
+        self::assertNull($timeLimit->getName());
 
-        self::assertInstanceOf(TimeLimit::class, $timeLimit->setCount($count));
-        self::assertSame($count, $timeLimit->getCount());
+        self::assertInstanceOf(TimeLimit::class, $timeLimit->setName($name));
+        self::assertSame($name, $timeLimit->getName());
     }
 }

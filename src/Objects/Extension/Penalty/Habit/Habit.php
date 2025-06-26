@@ -2,9 +2,22 @@
 
 namespace Fake\ChasterObjects\Objects\Extension\Penalty\Habit;
 
-use Fake\ChasterObjects\Objects\Traits\NameTrait;
-
-class Habit
+class Habit extends TimeLimit
 {
-    use NameTrait;
+    private ?int $count = 1;
+
+    public function getCount(): ?int
+    {
+        return $this->count;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setCount(?int $count): static
+    {
+        $this->count = $count;
+
+        return $this;
+    }
 }

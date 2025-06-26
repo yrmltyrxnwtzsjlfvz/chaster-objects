@@ -68,6 +68,7 @@ trait InfoTrait
         if (empty($this->getVotes())) {
             return $this->getMinVotes();
         }
+
         if ($this->getMinVotes() <= $this->getVotes()) {
             return 0;
         }
