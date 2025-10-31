@@ -2,6 +2,8 @@
 
 namespace Fake\ChasterObjects\Objects\Traits;
 
+use Bytes\DateBundle\Objects\ComparableDateInterval;
+use DateInterval;
 use Symfony\Component\Serializer\Annotation\SerializedName;
 
 trait TimeToAddLimitUsersTrait
@@ -20,6 +22,15 @@ trait TimeToAddLimitUsersTrait
     public function getTimeToAdd(): ?int
     {
         return $this->timeToAdd;
+    }
+
+    public function getTimeToAddInterval(): ?DateInterval
+    {
+        if (empty($this->getTimeToAdd())) {
+            return null;
+        }
+
+        return ComparableDateInterval::normalizeToDateInterval($this->getTimeToAdd());
     }
 
     /**
