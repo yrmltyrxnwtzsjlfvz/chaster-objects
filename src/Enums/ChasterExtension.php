@@ -37,6 +37,7 @@ enum ChasterExtension: string implements StringBackedEnumInterface
     case VERIFICATION_PICTURE = 'verification-picture';
     case WHEEL_OF_FORTUNE = 'wheel-of-fortune';
     case WORDLE = 'wordle';
+    case PROGRAMMABLE_LOCK = 'programmable-lock';
 
     public static function getFormChoiceKey(UnitEnum $value): string
     {
@@ -160,6 +161,7 @@ enum ChasterExtension: string implements StringBackedEnumInterface
             ChasterExtension::VERIFICATION_PICTURE => 'fa-solid fa-camera',
             ChasterExtension::WHEEL_OF_FORTUNE => 'fa-solid fa-dharmachakra',
             ChasterExtension::WORDLE => 'fa-solid fa-border-all',
+            ChasterExtension::PROGRAMMABLE_LOCK => 'fa-solid fa-code',
             default => throw new ValueError(),
         };
     }
