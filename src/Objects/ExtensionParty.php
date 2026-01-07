@@ -9,6 +9,7 @@ use Fake\ChasterObjects\Objects\Interfaces\LockInterface;
 use Fake\ChasterObjects\Objects\Traits\ExtensionTrait;
 use Symfony\Component\Serializer\Annotation\DiscriminatorMap;
 use Symfony\Component\Serializer\Annotation\SerializedName;
+use Fake\ChasterObjects\Objects\Extension\Partner\Gambling\Extension as GamblingExtension;
 
 #[DiscriminatorMap(typeProperty: 'slug', mapping: [
     'tasks' => Extension\Task\Extension::class,
@@ -29,6 +30,7 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
     'unlock-condition' => Extension\Partner\UnlockCondition\Extension::class,
     'wheel-of-fortune' => Extension\WheelOfFortune\Extension::class,
     'wordle' => Extension\Partner\Wordle\Extension::class,
+    'gambling' => GamblingExtension::class,
 ])]
 class ExtensionParty
 {
