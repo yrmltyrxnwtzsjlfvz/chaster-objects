@@ -38,6 +38,7 @@ enum ChasterExtension: string implements StringBackedEnumInterface
     case WHEEL_OF_FORTUNE = 'wheel-of-fortune';
     case WORDLE = 'wordle';
     case PROGRAMMABLE_LOCK = 'programmable-lock';
+    case CASINO = 'gambling';
 
     public static function getFormChoiceKey(UnitEnum $value): string
     {
